@@ -1,24 +1,17 @@
 import os
 import json
 import sys
-import importlib.util
+import time
 from google import genai
 from sqlalchemy import text
+from database.session import SessionLocal
 from app.embedding_engine import generate_vector
 from app.models import UserConversation, SystemLog
 from app.routing.router import get_best_model
+from app.routing.reward import calculate_reward, infer_quality_score
+from app.routing.bandit import update_bandit_reward
+from database.db import update_model_performance
 from core.dispatcher import Dispatcher
-
-# Handle database module import (naming conflict with database/ directory)
-def _load_database_module():
-    spec = importlib.util.spec_from_file_location("root_database", 
-        os.path.join(os.path.dirname(os.path.dirname(__file__)), "database.py"))
-    root_database = importlib.util.module_from_spec(spec)
-    spec.loader.exec_module(root_database)
-    return root_database
-
-root_database = _load_database_module()
-SessionLocal = root_database.SessionLocal
 
 client = genai.Client(api_key=os.getenv("GEMINI_API_KEY"))
 dispatcher = Dispatcher()
@@ -231,6 +224,72 @@ class VaultService:
             print(f"⚠️ Archive warning: {e}")
         finally:
             db.close()
+
+    # ==================== LEARNING & OPTIMIZATION ====================
+    @staticmethod
+    def calculate_and_update_reward(model_name: str, category: str, response: str,
+                                    tokens_consumed: int, cost_usd: float, 
+                                    latency_seconds: float):
+        """
+        Calculate reward after response generation and update learning systems.
+        
+        This completes the feedback loop:
+        1. Calculate reward based on response quality and metrics
+        2. Update Thompson Sampling bandit with reward
+        3. Update model performance statistics in database
+        
+        Args:
+            model_name: Model that generated the response
+            category: Task category
+            response: Generated response text
+            tokens_consumed: Tokens used
+            cost_usd: Actual cost in USD
+            latency_seconds: Response time
+        """
+        try:
+            # 1. Infer quality score from response
+            has_code = "```" in response or "def " in response or "class " in response
+            has_errors = any(err in response.lower() for err in ["error", "failed", "exception"])
+            quality_score = infer_quality_score(category, len(response), has_code, has_errors)
+            
+            # 2. Calculate comprehensive reward
+            reward_data = calculate_reward(
+                model_name=model_name,
+                category=category,
+                tokens_consumed=tokens_consumed,
+                cost_usd=cost_usd,
+                latency_seconds=latency_seconds,
+                response_quality=quality_score,
+                user_satisfaction=1.0  # Default to 1.0, can be overridden with user feedback
+            )
+            
+            combined_reward = reward_data["combined_reward"]
+            
+            # 3. Update Thompson Sampling bandit
+            update_bandit_reward(model_name, combined_reward)
+            
+            # 4. Update database model performance
+            update_model_performance(
+                model_id=model_name,
+                category=category,
+                reward=combined_reward,
+                cost=cost_usd,
+                latency=latency_seconds
+            )
+            
+            # 5. Log the learning update
+            print(f"\n[LEARNING] Model {model_name} ({category}):")
+            print(f"  Quality Reward:      {reward_data['quality_reward']}")
+            print(f"  Cost Reward:         {reward_data['cost_reward']}")
+            print(f"  Latency Reward:      {reward_data['latency_reward']}")
+            print(f"  Combined Reward:     {combined_reward}")
+            print(f"  Metrics: {tokens_consumed} tokens, ${cost_usd:.6f}, {latency_seconds:.2f}s")
+            
+            return reward_data
+            
+        except Exception as e:
+            print(f"⚠️ Reward calculation warning: {e}")
+            return None
 
     # ==================== LOGGING & MONITORING ====================
     @staticmethod

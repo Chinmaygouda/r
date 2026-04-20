@@ -25,6 +25,9 @@ langchain-huggingface>=0.0.4
 sentence-transformers>=2.2.0
 huggingface-hub>=0.21.0
 
+# ==================== MACHINE LEARNING & OPTIMIZATION ====================
+numpy>=1.24.0  # Thompson Sampling and statistical calculations
+
 # ==================== OPTIONAL (Production Only) ====================
 # gunicorn>=21.2.0  # Uncomment for production
 # pydantic-settings>=2.1.0  # Uncomment for advanced config

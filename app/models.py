@@ -60,3 +60,28 @@ class ConversationArchive(Base):
     topic_summary = Column(String)
     full_transcript = Column(String) # JSON string of the chat history
     archived_at = Column(DateTime, default=datetime.datetime.utcnow)
+
+# ==================== TABLE 5: Model Performance Tracking (NEW - LEARNING) ====================
+class ModelPerformance(Base):
+    __tablename__ = "model_performance"
+
+    id = Column(Integer, primary_key=True, index=True)
+    model_id = Column(String, index=True, nullable=False)
+    category = Column(String, nullable=False)
+    # Thompson Sampling - Beta distribution parameters
+    alpha = Column(Float, default=1.0)  # Success count (Beta alpha parameter)
+    beta = Column(Float, default=1.0)   # Failure count (Beta beta parameter)
+    # Performance statistics
+    total_selections = Column(Integer, default=0)
+    successful_responses = Column(Integer, default=0)
+    failed_responses = Column(Integer, default=0)
+    total_reward = Column(Float, default=0.0)  # Sum of all rewards
+    avg_reward = Column(Float, default=0.0)    # Average reward (0-1)
+    avg_cost = Column(Float, default=0.0)      # Average cost per response
+    avg_latency = Column(Float, default=0.0)   # Average latency in seconds
+    last_updated = Column(DateTime, default=datetime.datetime.utcnow, onupdate=datetime.datetime.utcnow)
+    
+    # Unique constraint: one performance record per model per category
+    __table_args__ = (
+        UniqueConstraint('model_id', 'category', name='uix_model_perf_category'),
+    )
