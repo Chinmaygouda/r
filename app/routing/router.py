@@ -69,6 +69,7 @@ def filter_models(models, category, complexity_score, complexity_label):
     - Category match
     - Tier rules (EASY → Tier 2,3 | MEDIUM → Tier 1,2 | HARD → Tier 1)
     - Complexity range (must fall within model's min-max)
+    - Sub-tier awareness: Tier 1 A (8.0-9.8) for ultra-high, Tier 1 B (7.5-9.5) for high
     - Active status
     """
     filtered = []
@@ -78,6 +79,12 @@ def filter_models(models, category, complexity_score, complexity_label):
     
     # Get allowed tiers for this complexity level
     allowed_tiers = TIER_RULES.get(complexity_label, [1, 2, 3])
+    
+    # Separate by tier for intelligent selection
+    tier1_a = []  # Premium ultra-complex (sub_tier A)
+    tier1_b = []  # Premium complex (sub_tier B)
+    tier2 = []    # Standard medium-complex
+    tier3 = []    # Budget low-complex
     
     for m in models:
         # Skip inactive models
@@ -94,7 +101,31 @@ def filter_models(models, category, complexity_score, complexity_label):
         
         # Check if complexity score falls within model's range
         if m["complexity_min"] <= complexity_score <= m["complexity_max"]:
-            filtered.append(m)
+            # Categorize by tier and sub_tier
+            if m["tier"] == 1:
+                if m["sub_tier"] == "A":
+                    tier1_a.append(m)
+                else:  # sub_tier B or None
+                    tier1_b.append(m)
+            elif m["tier"] == 2:
+                tier2.append(m)
+            else:  # tier 3
+                tier3.append(m)
+    
+    # Intelligently prioritize: Tier 1 A > Tier 1 B > Tier 2 > Tier 3
+    # For high complexity (7.5+), prefer Tier 1; for medium (5.5-7.5), allow Tier 2
+    if complexity_score >= 8.0:
+        # Ultra-high: prefer Tier 1 A
+        filtered = tier1_a + tier1_b + tier2 + tier3
+    elif complexity_score >= 7.5:
+        # High: prefer Tier 1 (A then B)
+        filtered = tier1_a + tier1_b + tier2 + tier3
+    elif complexity_score >= 5.5:
+        # Medium: allow Tier 1 B and Tier 2
+        filtered = tier1_b + tier1_a + tier2 + tier3
+    else:
+        # Low: all tiers okay
+        filtered = tier3 + tier2 + tier1_b + tier1_a
     
     return filtered
 
@@ -112,19 +143,19 @@ def route_model(category, complexity_score, complexity_label):
         "complexity_score": complexity score
     }
     """
-    print(f"\n🔀 ROUTING: category={category}, complexity={complexity_label}({complexity_score})")
+    print(f"\n[ROUTING] category={category}, complexity={complexity_label}({complexity_score})")
     
     # STEP 1: Fetch all models
     all_models = fetch_models()
-    print(f"📦 Fetched {len(all_models)} models from database")
+    print(f"[MODELS] Fetched {len(all_models)} models from database")
     
     # STEP 2: Filter models
     filtered = filter_models(all_models, category, complexity_score, complexity_label)
-    print(f"🔍 Filtered: {len(filtered)} models match criteria")
+    print(f"[FILTER] Filtered: {len(filtered)} models match criteria")
     
     if not filtered:
         # FALLBACK: Relax to nearest complexity
-        print("⚠️ No exact match - relaxing complexity constraint")
+        print("[WARN] No exact match - relaxing complexity constraint")
         filtered = [m for m in all_models if m["active"] and m["category"] == category]
         
         for m in filtered:
@@ -152,19 +183,19 @@ def route_model(category, complexity_score, complexity_label):
     
     # STEP 4: Get top-K
     candidates = get_top_k(scored, TOP_K)
-    print(f"⭐ Top candidates: {[m['name'] for m in candidates]}")
+    print(f"[CANDIDATES] Top candidates: {[m['name'] for m in candidates]}")
     
     # STEP 5: Confidence check
     confidence = compute_confidence(candidates)
-    print(f"📊 Confidence: {confidence:.3f}")
+    print(f"[CONFIDENCE] Score: {confidence:.3f}")
     
     # STEP 6: Decision
     if confidence >= CONFIDENCE_THRESHOLD:
         selected_model = candidates[0]["name"]
-        print(f"✅ HIGH CONFIDENCE: Selected {selected_model}")
+        print(f"[SELECTED] HIGH CONFIDENCE: Selected {selected_model}")
     else:
         selected_model = call_bandit(candidates)
-        print(f"🎲 LOW CONFIDENCE: Bandit selected {selected_model}")
+        print(f"[SELECTED] LOW CONFIDENCE: Bandit selected {selected_model}")
     
     return {
         "candidate_models": [m["name"] for m in candidates],
@@ -186,7 +217,7 @@ def get_best_model(user_prompt, user_allowed_tier):
     4. Return model_id, provider, score, category, tier
     """
     # --- STEP 1: MACRO-ROUTING (Gemini Analysis) ---
-    print(f"🧠 Analyzing prompt with Gemini...")
+    print(f"[ANALYSIS] Analyzing prompt with Gemini...")
     analysis = client.models.generate_content(
         model='gemini-2.5-flash',
         contents=f"{ROUTER_PROMPT}\n\nUser Prompt: {user_prompt}"
@@ -200,7 +231,7 @@ def get_best_model(user_prompt, user_allowed_tier):
         logical_necessity = parts[3].lower() == 'true'
         is_long = parts[4].lower() == 'true'
     except Exception as e:
-        print(f"⚠️ Parse error: {e} - using fallback")
+        print(f"[WARN] Parse error: {e} - using fallback")
         score, category, needs_cot, logical_necessity, is_long = 5.0, "UTILITY", False, False, False
     
     # Convert score to label
