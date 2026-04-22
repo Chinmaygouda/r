@@ -1,9 +1,15 @@
 import os
 import sys
+import io
 from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
 from dotenv import load_dotenv
 from datetime import datetime
+
+# Prevent Windows console from crashing on emoji prints
+if sys.platform == "win32":
+    sys.stdout.reconfigure(encoding='utf-8')
+    sys.stderr.reconfigure(encoding='utf-8')
 
 # Add root to path so we can import from root modules
 sys.path.insert(0, os.path.dirname(os.path.dirname(__file__)))
@@ -85,11 +91,20 @@ class QueryRequest(BaseModel):
     user_id: str      # Required for privacy separation
     prompt: str       # The user's question
     user_tier: int = 1  # Optional: 1 (Premium), 2 (Standard), 3 (Budget)
+    modality: str = "TEXT"  # TEXT, IMAGE, VIDEO, AUDIO, MULTIMODAL
+    image_data: str = None  # Optional Base64 image
+    audio_data: str = None  # Optional Base64 audio
 
 class QueryResponse(BaseModel):
     status: str
     source: str  # "VAULT_CACHE", "AI_GENERATION", or "ERROR"
     data: dict
+    vault_id: str = None  # ID for later feedback
+
+class FeedbackRequest(BaseModel):
+    vault_id: str  # Which conversation to update
+    feedback: float  # +1.0 (thumbs up) or -1.0 (thumbs down)
+    comments: str = None  # Optional user feedback
 
 # ==================== MAIN UNIFIED ENDPOINT ====================
 @app.post("/ask", response_model=QueryResponse)
@@ -140,7 +155,7 @@ async def ask_unified(request: QueryRequest):
         # PHASE 2: INTELLIGENT ROUTING (Select Best Model)
         # ======================================================
         print("\n[PHASE 2] 🧭 VAULT MISS - Intelligent routing...")
-        model_id, provider, score, category, tier = VaultService.get_best_provider_and_model(
+        model_id, provider, score, category, tier, fallbacks = VaultService.get_best_provider_and_model(
             request.prompt, 
             request.user_tier
         )
@@ -148,25 +163,64 @@ async def ask_unified(request: QueryRequest):
         print(f"   Complexity Score: {score} | Category: {category} | Tier: {tier}")
 
         # ======================================================
-        # PHASE 3: EXECUTION (Call Selected Provider)
+        # PHASE 3: EXECUTION (Call Selected Provider with Fallback)
         # ======================================================
         print("\n[PHASE 3] 🚀 Executing with selected model...")
-        response_data = VaultService.execute_with_provider(
-            provider, 
-            model_id, 
-            request.prompt
-        )
         
-        if not response_data or "text" not in response_data:
-            raise Exception("Invalid response from provider")
+        execution_success = False
+        real_ai_response = ""
+        real_tokens_used = 0
+        cost = 0.0
         
-        real_ai_response = response_data["text"]
-        real_tokens_used = response_data.get("tokens", 0)
+        # We will try the primary model, and if it fails, try up to 2 fallbacks (max 3 total attempts)
+        models_to_try = [{"model_id": model_id, "provider": provider}] + fallbacks[:2]
         
-        # Calculate cost based on provider and tokens
-        cost = VaultService._calculate_cost(provider, model_id, real_tokens_used)
-        print(f"✅ Generated | Tokens: {real_tokens_used} | Cost: ${cost:.4f}")
-
+        for attempt_idx, candidate in enumerate(models_to_try):
+            c_provider = candidate["provider"]
+            c_model = candidate["model_id"]
+            
+            if attempt_idx > 0:
+                print(f"\n[FALLBACK {attempt_idx}] 🔄 Attempting alternative model: {c_provider}/{c_model}")
+            
+            response_data = VaultService.execute_with_provider(
+                c_provider, c_model, request.prompt
+            )
+            
+            if response_data and response_data.get("success") is True:
+                real_ai_response = response_data["text"]
+                real_tokens_used = response_data.get("tokens", 0)
+                cost = VaultService._calculate_cost(c_provider, c_model, real_tokens_used)
+                
+                print(f"✅ Generated from {c_model} | Tokens: {real_tokens_used} | Cost: ${cost:.4f}")
+                
+                # Update our primary variables so it saves in DB correctly
+                model_id = c_model
+                provider = c_provider
+                execution_success = True
+                break
+            else:
+                err_msg = response_data.get('text', 'Unknown Error') if response_data else 'Invalid Empty Response'
+                print(f"❌ Execution failed for {c_provider}/{c_model}: {err_msg}")
+                # Loop naturally continues to next fallback candidate
+        if not execution_success:
+            final_err = f"System attempted to route your request, but all AI providers failed or exhausted their quotas.\n\nModels Attempted: {', '.join([m['model_id'] for m in models_to_try])}\n\nLast Exact Error: {err_msg}"
+            return QueryResponse(
+                status="Error - Provider Failure",
+                source="FALLBACK_EXHAUSTED",
+                data={
+                    "user_id": request.user_id,
+                    "ai_response": final_err,
+                    "metrics": {
+                        "provider": provider,
+                        "model_used": model_id,
+                        "complexity_score": score,
+                        "category": category,
+                        "tier": tier,
+                        "tokens_consumed": 0,
+                        "cost_usd": 0.0
+                    }
+                }
+            )
         # ======================================================
         # PHASE 4: STORAGE (Save to Vault + Redis)
         # ======================================================
@@ -237,6 +291,69 @@ async def get_vault_stats(user_id: str):
             "estimated_tokens": total_tokens * 100,  # Rough estimate
             "estimated_cost": f"${total_cost * 0.01:.2f}"
         }
+    finally:
+        db.close()
+
+# ==================== EXPLICIT FEEDBACK LOOP ====================
+@app.post("/feedback")
+async def submit_feedback(request: FeedbackRequest):
+    """
+    User feedback endpoint for Thompson Sampling training.
+    
+    Thumbs up (+1.0) or thumbs down (-1.0) explicitly trains the bandit.
+    This is the ground-truth signal that improves model selection over time.
+    
+    Args:
+        vault_id: ID of the conversation to update
+        feedback: +1.0 (good) or -1.0 (bad)
+        comments: Optional user comments
+    
+    Returns:
+        Confirmation of feedback recorded
+    """
+    from app.routing.thompson_sampler import get_thompson_sampler
+    
+    db = SessionLocal()
+    try:
+        # Find the conversation in the vault
+        conversation = db.query(UserConversation).filter(
+            UserConversation.id == request.vault_id
+        ).first()
+        
+        if not conversation:
+            raise HTTPException(status_code=404, detail="Conversation not found")
+        
+        # Normalize feedback to 0-1 scale for reward
+        reward_score = (request.feedback + 1.0) / 2.0  # -1 → 0, +1 → 1
+        
+        # Update Thompson Sampler with explicit reward
+        sampler = get_thompson_sampler()
+        sampler.register_model(conversation.model_used)
+        sampler.update_model_performance(
+            conversation.model_used,
+            reward=reward_score,
+            category=conversation.category
+        )
+        
+        print(f"✅ Feedback recorded: {conversation.model_used} | Reward: {reward_score:.2f}")
+        
+        # Store feedback in database (optional logging)
+        conversation.user_feedback = request.feedback
+        if request.comments:
+            conversation.feedback_comments = request.comments
+        db.commit()
+        
+        return {
+            "status": "success",
+            "message": f"Feedback recorded for {conversation.model_used}",
+            "reward_score": reward_score,
+            "comments": request.comments or "No comments"
+        }
+    
+    except Exception as e:
+        db.rollback()
+        print(f"❌ Feedback error: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
     finally:
         db.close()
 

@@ -80,8 +80,12 @@ def filter_models(models, category, complexity_score, complexity_label):
         if not m["active"]:
             continue
         
-        # Skip if category doesn't match
-        if m["category"] != category:
+        # FIX: MULTI category should map to AGENTS or CHAT in DB
+        target_categories = [category]
+        if category == "MULTI":
+            target_categories = ["MULTI", "AGENTS", "CHAT"]
+            
+        if m["category"] not in target_categories:
             continue
         
         # Skip if tier not allowed for this complexity level
@@ -200,58 +204,67 @@ def get_best_model(user_prompt, user_allowed_tier):
     Legacy wrapper for compatibility with existing vault_service.py
     
     Flow:
-    1. Analyze prompt with Gemini → complexity + category
+    1. Analyze prompt with DeBERTa → complexity + category
     2. Convert complexity score to label (EASY/MEDIUM/HARD)
-    3. Route using new filtering+scoring logic
-    4. Return model_id, provider, score, category, tier
+    3. Apply heuristics for MULTI classification (Fix 1)
+    4. Route using new filtering+scoring logic
+    5. Return model_id, provider, score, category, tier, candidate_fallbacks
     """
-    # --- STEP 1: MACRO-ROUTING (Gemini Analysis) ---
-    print(f"[ANALYSIS] Analyzing prompt with Gemini...")
-    analysis = client.models.generate_content(
-        model='gemini-2.5-flash',
-        contents=f"{ROUTER_PROMPT}\n\nUser Prompt: {user_prompt}"
-    )
+    # --- STEP 1: MACRO-ROUTING (DeBERTa Offline Analysis) ---
+    print(f"[ANALYSIS] Analyzing prompt with Local DeBERTa...")
+    from app.routing.deberta_classifier import get_semantic_classifier
+    
+    classifier = get_semantic_classifier()
     
     try:
-        parts = [p.strip() for p in analysis.text.strip().split(',')]
-        score = float(parts[0])
-        category = parts[1].upper()
-        needs_cot = parts[2].lower() == 'true'
-        logical_necessity = parts[3].lower() == 'true'
-        is_long = parts[4].lower() == 'true'
+        category, confidence, complexity_label = classifier.classify_with_complexity(user_prompt)
+        
+        # We need a float score for micro-routing logic.
+        if complexity_label == "HARD":
+            score = 8.5
+        elif complexity_label == "MEDIUM":
+            score = 5.5
+        else:
+            score = 3.0
+            
     except Exception as e:
-        print(f"[WARN] Parse error: {e} - using fallback")
-        score, category, needs_cot, logical_necessity, is_long = 5.0, "UTILITY", False, False, False
-    
-    # Convert score to label
-    if score >= 7.0:
-        complexity_label = "HARD"
-    elif score >= 4.0:
-        complexity_label = "MEDIUM"
-    else:
-        complexity_label = "EASY"
+        print(f"[WARN] Local classifier error: {e} - using fallback")
+        score, category, complexity_label = 5.0, "UTILITY", "MEDIUM"
+        
+    # --- FIX 1: HEURISTIC OVERRIDE FOR "MULTI" ---
+    # DeBERTa doesn't know 'MULTI', so it maps complex multi-step prompts to 'AGENTS' or 'CODE'.
+    multi_step_keywords = ["first", "then", "finally", "also", "and then"]
+    keyword_count = sum(1 for kw in multi_step_keywords if kw in user_prompt.lower())
+    if keyword_count >= 2:
+        print("[HEURISTIC] Detected multi-step prompt. Overriding category to MULTI.")
+        category = "MULTI"
     
     print(f"📊 Analysis: score={score}, category={category}, label={complexity_label}")
     
-    # --- STEP 2-6: MICRO-ROUTING (New integrated logic) ---
+    # --- STEP 2-6: MICRO-ROUTING ---
     result = route_model(category, score, complexity_label)
     selected_model_id = result["selected_model"]
+    candidate_names = result["candidate_models"]
     
-    # FALLBACK: If routing returned Gemini, fetch it from DB
-    if selected_model_id == "gemini-2.5-flash":
-        return selected_model_id, "Google", score, category, 2
-    
-    # Get model details from database
     db = SessionLocal()
     try:
-        model = db.query(AIModel).filter(
-            AIModel.model_id == selected_model_id
-        ).first()
+        # Resolve the top model
+        top_model = db.query(AIModel).filter(AIModel.model_id == selected_model_id).first()
+        top_provider = top_model.provider if top_model else "Unknown"
+        top_tier = top_model.tier if top_model else 2
         
-        if model:
-            return model.model_id, model.provider, score, category, model.tier
+        # Resolve fallbacks
+        fallbacks = []
+        for c_name in candidate_names:
+            c_model = db.query(AIModel).filter(AIModel.model_id == c_name).first()
+            if c_model:
+                fallbacks.append({"model_id": c_model.model_id, "provider": c_model.provider})
+                
+        # If fallback list is empty, put gemini-flash-latest as universal fallback
+        if not fallbacks:
+            fallbacks.append({"model_id": "gemini-flash-latest", "provider": "Google"})
+            
+        print(f"🔄 Routing resolved with {len(fallbacks)-1} fallbacks.")
+        return selected_model_id, top_provider, score, category, top_tier, fallbacks
     finally:
         db.close()
-    
-    # Fallback if model not found
-    return selected_model_id, "Unknown", score, category, 2

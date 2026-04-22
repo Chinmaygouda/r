@@ -16,7 +16,7 @@ class Dispatcher:
         
         # Google API configured at startup (optional)
         try:
-            self.client_google = genai.Client(api_key=os.getenv("GOOGLE_API_KEY"))
+            self.client_google = genai.Client(api_key=os.getenv("GEMINI_API_KEY"))
         except:
             pass
 
@@ -50,13 +50,13 @@ class Dispatcher:
         return self.hub.get(provider)
 
     def execute(self, provider, model_id, prompt):
-        """Standardized execution returning {'text': str, 'tokens': int}"""
+        """Standardized execution returning {'text': str, 'tokens': int, 'success': bool}"""
         try:
             # Route to OpenAI-Compatible Hub
             if provider in ["OpenAI", "xAI", "OpenRouter", "Together", "DeepSeek", "Mistral", "HuggingFace"]:
                 client = self._get_hub_client(provider)
                 if not client:
-                    return {"text": f"Error: {provider} API key not configured.", "tokens": 0}
+                    return {"text": f"Error: {provider} API key not configured.", "tokens": 0, "success": False}
                 
                 response = client.chat.completions.create(
                     model=model_id,
@@ -64,7 +64,8 @@ class Dispatcher:
                 )
                 return {
                     "text": response.choices[0].message.content,
-                    "tokens": response.usage.total_tokens if response.usage else 0
+                    "tokens": response.usage.total_tokens if response.usage else 0,
+                    "success": True
                 }
 
             # Route to Anthropic
@@ -80,14 +81,14 @@ class Dispatcher:
                     )
                     # Correct attribute names for Anthropic SDK
                     tokens = response.usage.input_tokens + response.usage.output_tokens
-                    return {"text": response.content[0].text, "tokens": tokens}
+                    return {"text": response.content[0].text, "tokens": tokens, "success": True}
                 except ImportError:
-                    return {"text": "Error: Anthropic SDK not installed. Install with: pip install anthropic", "tokens": 0}
+                    return {"text": "Error: Anthropic SDK not installed. Install with: pip install anthropic", "tokens": 0, "success": False}
 
             # Route to Google
             elif provider == "Google":
                 if not self.client_google:
-                    self.client_google = genai.Client(api_key=os.getenv("GOOGLE_API_KEY"))
+                    self.client_google = genai.Client(api_key=os.getenv("GEMINI_API_KEY"))
                 
                 if self.client_google:
                     response = self.client_google.models.generate_content(
@@ -96,10 +97,11 @@ class Dispatcher:
                     )
                     return {
                         "text": response.text,
-                        "tokens": response.usage_metadata.total_token_count if response.usage_metadata else 0
+                        "tokens": response.usage_metadata.total_token_count if response.usage_metadata else 0,
+                        "success": True
                     }
                 else:
-                    return {"text": "Error: Google API key not configured.", "tokens": 0}
+                    return {"text": "Error: Google API key not configured.", "tokens": 0, "success": False}
 
             # Route to Cohere
             elif provider == "Cohere":
@@ -113,16 +115,17 @@ class Dispatcher:
                         response = self.client_cohere.chat(model=model_id, message=prompt)
                         return {
                             "text": response.text, 
-                            "tokens": response.meta.tokens.total_tokens if response.meta else 0
+                            "tokens": response.meta.tokens.total_tokens if response.meta else 0,
+                            "success": True
                         }
                     else:
-                        return {"text": "Error: Cohere API key not configured.", "tokens": 0}
+                        return {"text": "Error: Cohere API key not configured.", "tokens": 0, "success": False}
                 except ImportError:
-                    return {"text": "Error: Cohere SDK not installed. Install with: pip install cohere", "tokens": 0}
+                    return {"text": "Error: Cohere SDK not installed. Install with: pip install cohere", "tokens": 0, "success": False}
 
             # If no provider matches
-            return {"text": f"Error: Provider '{provider}' not configured.", "tokens": 0}
+            return {"text": f"Error: Provider '{provider}' not configured.", "tokens": 0, "success": False}
 
         except Exception as e:
             # Always return a dict even on error to prevent main.py from crashing
-            return {"text": f"Execution Error [{provider}]: {str(e)}", "tokens": 0}
+            return {"text": f"Execution Error [{provider}]: {str(e)}", "tokens": 0, "success": False}

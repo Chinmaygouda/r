@@ -65,21 +65,21 @@ class VaultService:
     def get_best_provider_and_model(prompt: str, user_allowed_tier: int = 1):
         """
         Uses router to intelligently select best provider and model.
-        Returns: (model_id, provider, score, category, tier)
+        Returns: (model_id, provider, score, category, tier, fallbacks)
         """
         try:
             result = get_best_model(prompt, user_allowed_tier)
             return result
         except Exception as e:
             print(f"⚠️ Router failed: {e}. Falling back to Gemini...")
-            return ("gemini-2.5-flash", "Google", 5.0, "UTILITY", 2)
+            return ("gemini-2.5-flash", "Google", 5.0, "UTILITY", 2, [{"model_id": "gemini-1.5-pro", "provider": "Google"}])
 
     # ==================== PHASE 3: EXECUTION WITH DISPATCHER ====================
     @staticmethod
     def execute_with_provider(provider: str, model_id: str, prompt: str):
         """
         Routes request through appropriate provider using dispatcher.
-        Returns: {text, tokens}
+        Returns: {text, tokens, success}
         """
         try:
             print(f"🚀 Executing with {provider} - {model_id}")
@@ -87,7 +87,7 @@ class VaultService:
             return response
         except Exception as e:
             print(f"❌ Dispatcher error: {e}")
-            return {"text": f"Execution Error: {str(e)}", "tokens": 0}
+            return {"text": f"Execution Error: {str(e)}", "tokens": 0, "success": False}
 
     # ==================== PHASE 4: STORAGE & ARCHIVING ====================
     @staticmethod

@@ -1,0 +1,1371 @@
+text,label
+Write a python script to reverse a linked list,CODE
+Can you debug this react component? It's throwing a null pointer,CODE
+What is the difference between a class and an interface?,CODE
+Regex to match email addresses,CODE
+How do I setup a docker-compose for postgres and node?,CODE
+Help me optimize this SQL query for better performance,CODE
+Write an async fetch function in javascript,CODE
+Why does this C++ code segfault?,CODE
+Implement a binary search tree in java,CODE
+How do I catch exceptions in Go?,CODE
+Refactor this python script to use async,CODE
+Why is my docker container crashing on startup?,CODE
+Explain the time complexity of quicksort,CODE
+How do I center a div in CSS?,CODE
+Write a bash script to backup my home directory,CODE
+Convert this snippet from Python to JavaScript,CODE
+Setup a simple Express server,CODE
+What is a decorator in Python?,CODE
+How to use git rebase correctly?,CODE
+"Explain the difference between let, const, and var",CODE
+How do I use a custom hook in React?,CODE
+Write a unit test for this calculator class,CODE
+How to implement JWT authentication?,CODE
+Explain the MVC architecture,CODE
+How to prevent SQL injection in PHP?,CODE
+Write a recursive function for factorial in Python,CODE
+How to use the map function in JavaScript?,CODE
+Explain the 'this' keyword in JavaScript,CODE
+What is a promise in JavaScript?,CODE
+How to handle file uploads in a web app?,CODE
+Write a shader in GLSL to create a gradient,CODE
+How to use the pandas library for data manipulation?,CODE
+Explain the concept of inheritance in OOP,CODE
+How to use a try-catch block in Java?,CODE
+Write a script to automate a task using Python,CODE
+How to implement a singleton pattern in C#?,CODE
+Explain the difference between a stack and a queue,CODE
+How to use the fetch API in JavaScript?,CODE
+Write a regular expression to match a URL,CODE
+How to use a dictionary in Python?,CODE
+Explain the purpose of a constructor in a class,CODE
+How to implement a linked list in C?,CODE
+Write a script to parse a JSON file,CODE
+How to use a list comprehension in Python?,CODE
+Explain the difference between a list and a tuple in Python,CODE
+How to use the filter function in JavaScript?,CODE
+Write a function to check if a string is a palindrome,CODE
+How to implement a sort algorithm in Python?,CODE
+Explain the concept of a closure in JavaScript,CODE
+How to use a set in Python?,CODE
+Write a script to get the current time and date,CODE
+How to implement a binary search in Python?,CODE
+Explain the purpose of a namespace in C++,CODE
+How to use the reduce function in JavaScript?,CODE
+Write a function to find the maximum value in a list,CODE
+How to use a lambda function in Python?,CODE
+Explain the concept of a interface in TypeScript,CODE
+How to use a generator in Python?,CODE
+Write a script to rename multiple files in a directory,CODE
+How to use a module in JavaScript?,CODE
+Explain the difference between a synchronous and asynchronous function,CODE
+How to use a switch statement in JavaScript?,CODE
+Write a function to calculate the Fibonacci sequence,CODE
+How to use a for loop in Python?,CODE
+Explain the purpose of a package in Java,CODE
+How to use a while loop in Python?,CODE
+Write a script to read a text file and count the words,CODE
+How to use an if-else statement in Python?,CODE
+Explain the concept of a variable in programming,CODE
+How to use a function in Python?,CODE
+"Write a script to print 'Hello, World!'",CODE
+How to use a class in Python?,CODE
+Explain the purpose of a comment in code,CODE
+How to use a library in Python?,CODE
+Write a script to add two numbers,CODE
+How to use a list in Python?,CODE
+Explain the concept of a loop in programming,CODE
+How to use a condition in programming,CODE
+Write a script to find the square of a number,CODE
+How to use a variable in JavaScript?,CODE
+Explain the concept of an array in programming,CODE
+How to use a function in JavaScript?,CODE
+Write a script to subtract two numbers,CODE
+How to use a class in JavaScript?,CODE
+Explain the purpose of a function in programming,CODE
+How to use a loop in JavaScript?,CODE
+Write a script to multiply two numbers,CODE
+How to use a condition in JavaScript?,CODE
+Write a script to divide two numbers,CODE
+How to use a library in JavaScript?,CODE
+Explain the concept of an object in programming,CODE
+How to use a string in programming,CODE
+Write a script to concatenate two strings,CODE
+How to use a boolean in programming,CODE
+Write a script to check if a number is even or odd,CODE
+How to use a number in programming,CODE
+Write a script to find the sum of a list of numbers,CODE
+How to use a dictionary in JavaScript?,CODE
+Explain the concept of a module in programming,CODE
+How to use a package in Python?,CODE
+Write a script to find the average of a list of numbers,CODE
+How to use a set in JavaScript?,CODE
+Explain the concept of a namespace in programming,CODE
+How to use a template in programming,CODE
+Write a script to find the factorial of a number,CODE
+How to use a regex in programming,CODE
+Explain the concept of a pointer in programming,CODE
+How to use a reference in programming,CODE
+Write a script to find the length of a string,CODE
+How to use a character in programming,CODE
+Explain the concept of a bit in programming,CODE
+How to use a byte in programming,CODE
+Write a script to convert a number to a string,CODE
+How to use an operator in programming,CODE
+Explain the concept of an expression in programming,CODE
+How to use a statement in programming,CODE
+Write a script to convert a string to a number,CODE
+How to use a variable in C++?,CODE
+Explain the concept of a type in programming,CODE
+How to use a class in C++?,CODE
+"Write a script to print 'Hello, World!' in C++",CODE
+How to use a function in C++?,CODE
+Explain the concept of a header in C++,CODE
+How to use a loop in C++?,CODE
+Write a script to add two numbers in C++,CODE
+How to use a condition in C++?,CODE
+Write a script to subtract two numbers in C++,CODE
+How to use a library in C++?,CODE
+Explain the concept of a compiler in programming,CODE
+How to use a debugger in programming,CODE
+Write a script to multiply two numbers in C++,CODE
+How to use a build system in programming,CODE
+Explain the concept of an IDE in programming,CODE
+How to use a version control system in programming,CODE
+Write a script to divide two numbers in C++,CODE
+How to use a testing framework in programming,CODE
+Explain the concept of a runtime in programming,CODE
+How to use a framework in programming,CODE
+Write a script to find the square of a number in C++,CODE
+How to use a virtual machine in programming,CODE
+Explain the concept of a container in programming,CODE
+How to use an API in programming,CODE
+Write a script to find the sum of a list of numbers in C++,CODE
+How to use a platform in programming,CODE
+Explain the concept of a service in programming,CODE
+How to use a protocol in programming,CODE
+Write a script to find the average of a list of numbers in C++,CODE
+How to use a format in programming,CODE
+Explain the concept of a schema in programming,CODE
+How to use a metadata in programming,CODE
+Write a script to find the factorial of a number in C++,CODE
+How to use a configuration in programming,CODE
+Explain the concept of a deployment in programming,CODE
+How to use a monitoring in programming,CODE
+Write a script to find the length of a string in C++,CODE
+How to use a logging in programming,CODE
+Explain the concept of a security in programming,CODE
+How to use an authentication in programming,CODE
+Write a script to convert a number to a string in C++,CODE
+How to use an authorization in programming,CODE
+Explain the concept of a encryption in programming,CODE
+How to use a decryption in programming,CODE
+Write a script to convert a string to a number in C++,CODE
+How to use a firewall in programming,CODE
+Explain the concept of a network in programming,CODE
+How to use a database in programming,CODE
+Write a script to find the minimum value in a list,CODE
+How to use a database management system in programming,CODE
+Explain the concept of a server in programming,CODE
+How to use a client in programming,CODE
+Write a script to query a database,CODE
+How to use a browser in programming,CODE
+Explain the concept of a web application in programming,CODE
+How to use a mobile application in programming,CODE
+Write a script to create a web page,CODE
+How to use a desktop application in programming,CODE
+Explain the concept of a cloud application in programming,CODE
+How to use a distributed application in programming,CODE
+Write a script to send an HTTP request,CODE
+How to use a microservice in programming,CODE
+Explain the concept of an event-driven architecture in programming,CODE
+How to use a message queue in programming,CODE
+Write a script to process a stream of data,CODE
+How to use a serverless architecture in programming,CODE
+Explain the concept of a DevOps in programming,CODE
+How to use a CI/CD in programming,CODE
+Write a script to automate a deployment,CODE
+How to use a containerization in programming,CODE
+Explain the concept of an orchestration in programming,CODE
+How to use a virtualization in programming,CODE
+Write a script to manage a cluster,CODE
+How to use an observability in programming,CODE
+Explain the concept of a site reliability engineering in programming,CODE
+How to use a cloud native in programming,CODE
+Write a script to provision a server,CODE
+How to use an Infrastructure as Code in programming,CODE
+Explain the concept of a platform engineering in programming,CODE
+How to use a developer experience in programming,CODE
+Explain the statistical significance of a p-value less than 0.05,ANALYSIS
+Analyze this sales data and tell me the main trends over Q3,ANALYSIS
+Break down the pros and cons of using microservices vs monolith,ANALYSIS
+Compare the economic impacts of inflation in the 80s vs now,ANALYSIS
+What insights can we draw from this customer churn chart?,ANALYSIS
+Summarize the main arguments of the paper on quantum computing,ANALYSIS
+Evaluate the performance metrics of these two machine learning models,ANALYSIS
+What patterns exist in this network traffic log?,ANALYSIS
+Explain how interest rates affect the housing market,ANALYSIS
+Provide a strategic breakdown of this company's Q4 earnings report,ANALYSIS
+Assess the impact of social media on mental health research,ANALYSIS
+Conduct a SWOT analysis for a new electric vehicle startup,ANALYSIS
+Examine the relationship between GDP and unemployment rates,ANALYSIS
+Interpret the findings of this clinical trial on a new drug,ANALYSIS
+Review the historical context of the French Revolution,ANALYSIS
+Analyze the themes in Shakespeare's Hamlet,ANALYSIS
+Discuss the ethical implications of AI in healthcare,ANALYSIS
+Evaluate the effectiveness of a government policy on climate change,ANALYSIS
+Compare two different marketing strategies for a consumer product,ANALYSIS
+Analyze the demographic shifts in urban areas over the last decade,ANALYSIS
+Explain the scientific principles behind photosynthesis,ANALYSIS
+Examine the role of the central bank in controlling the money supply,ANALYSIS
+Analyze the impact of a global pandemic on the world economy,ANALYSIS
+Review the major theories of psychological development,ANALYSIS
+Analyze the structure and function of the human heart,ANALYSIS
+Evaluate the quality of a news article for bias and accuracy,ANALYSIS
+Compare the features of two competing smartphone models,ANALYSIS
+Analyze the market potential for a new software application,ANALYSIS
+Review the legal framework of international trade agreements,ANALYSIS
+Analyze the causes and consequences of a historical event,ANALYSIS
+Explain the mechanics of a black hole in astrophysics,ANALYSIS
+Analyze the cultural impact of a popular film or book,ANALYSIS
+Evaluate the financial health of a company through its balance sheet,ANALYSIS
+Compare the philosophies of two major thinkers,ANALYSIS
+Analyze the design of a user interface for usability and accessibility,ANALYSIS
+Examine the environmental effects of a specific industrial process,ANALYSIS
+Review the history and development of a specific artistic style,ANALYSIS
+Analyze the results of an opinion poll on a political issue,ANALYSIS
+Explain the basic concepts of quantum mechanics,ANALYSIS
+Analyze the role of technology in modern warfare,ANALYSIS
+Evaluate the benefits and risks of a specific medical procedure,ANALYSIS
+Compare the educational systems of two different countries,ANALYSIS
+Analyze the language and rhetoric used in a famous speech,ANALYSIS
+Review the evolution of a specific species in biology,ANALYSIS
+Analyze the economic theories of a famous economist,ANALYSIS
+Examine the sociological factors that contribute to a specific social issue,ANALYSIS
+Review the major events of a specific historical period,ANALYSIS
+Analyze the plot and character development in a novel,ANALYSIS
+Explain the principles of a specific scientific method,ANALYSIS
+Analyze the impact of a specific discovery on history,ANALYSIS
+Evaluate the success of a specific artistic project,ANALYSIS
+Compare the performance of two different computer processors,ANALYSIS
+Analyze the data from a scientific experiment for conclusions,ANALYSIS
+Examine the historical development of a specific language,ANALYSIS
+Review the major themes in a specific genre of literature,ANALYSIS
+Analyze the role of a specific individual in a historical event,ANALYSIS
+Explain the concepts of a mathematical theorem,ANALYSIS
+Analyze the impact of a specific technology on society,ANALYSIS
+Evaluate the effectiveness of a specific teaching method,ANALYSIS
+Compare the features of two different web browsers,ANALYSIS
+Analyze the market trends for a specific industry,ANALYSIS
+Review the legal basis for a specific court decision,ANALYSIS
+Analyze the composition and structure of a specific molecule,ANALYSIS
+Explain the basics of a specific programming paradigm,ANALYSIS
+Analyze the role of media in shaping public opinion,ANALYSIS
+Evaluate the impact of a specific social movement,ANALYSIS
+Compare the structures of two different types of cells,ANALYSIS
+Analyze the themes in a specific cycle of poems,ANALYSIS
+Review the history of a specific scientific theory,ANALYSIS
+Analyze the economic impact of a specific natural disaster,ANALYSIS
+Explain the principles of a specific engineering design,ANALYSIS
+Analyze the role of a specific institution in a society,ANALYSIS
+Evaluate the results of a specific business campaign,ANALYSIS
+Compare the characteristics of two different musical genres,ANALYSIS
+Analyze the structure of a specific building or monument,ANALYSIS
+Review the development of a specific political ideology,ANALYSIS
+Analyze the themes in a specific collection of short stories,ANALYSIS
+Explain the concepts of a specific philosophical school,ANALYSIS
+Analyze the impact of a specific invention on the world,ANALYSIS
+Evaluate the quality of a specific piece of software,ANALYSIS
+Compare the methods of two different types of research,ANALYSIS
+Analyze the data from a specific market survey,ANALYSIS
+Examine the role of a specific factor in a specific process,ANALYSIS
+Review the history of a specific athletic competition,ANALYSIS
+Analyze the themes in a specific play or drama,ANALYSIS
+Explain the concepts of a specific scientific law,ANALYSIS
+Analyze the impact of a specific social change on history,ANALYSIS
+Evaluate the success of a specific educational program,ANALYSIS
+Compare the performance of two different mobile operating systems,ANALYSIS
+Analyze the data from a specific clinical study,ANALYSIS
+Examine the historical development of a specific art form,ANALYSIS
+Review the major themes in a specific period of literature,ANALYSIS
+Analyze the role of a specific country in a historical event,ANALYSIS
+Explain the concepts of a specific physical theory,ANALYSIS
+Analyze the impact of a specific cultural shift on society,ANALYSIS
+Evaluate the effectiveness of a specific public health initiative,ANALYSIS
+Compare the architectures of two different computer systems,ANALYSIS
+Analyze the results of a specific psychological study,ANALYSIS
+Review the history of a specific architectural style,ANALYSIS
+Analyze the themes in a specific opera or musical,ANALYSIS
+Explain the principles of a specific economic model,ANALYSIS
+Analyze the role of a specific group in a political process,ANALYSIS
+Evaluate the quality of a specific cinematic production,ANALYSIS
+Compare the properties of two different chemical elements,ANALYSIS
+Analyze the data from a specific astronomical observation,ANALYSIS
+Examine the role of a specific variable in a specific equation,ANALYSIS
+Review the history of a specific technological advancement,ANALYSIS
+Analyze the themes in a specific photographic series,ANALYSIS
+Explain the concepts of a specific sociological theory,ANALYSIS
+Analyze the impact of a specific legal change on society,ANALYSIS
+Evaluate the success of a specific environmental project,ANALYSIS
+Compare the features of two different database systems,ANALYSIS
+Analyze the results of a specific historical investigation,ANALYSIS
+Examine the role of a specific agent in a specific reaction,ANALYSIS
+Review the history of a specific intellectual movement,ANALYSIS
+Analyze the themes in a specific body of work,ANALYSIS
+Explain the principles of a specific grammatical rule,ANALYSIS
+Analyze the impact of a specific scientific discovery on society,ANALYSIS
+Evaluate the quality of a specific academic paper,ANALYSIS
+Compare the methodologies of two different types of analysis,ANALYSIS
+Analyze the data from a specific social media campaign,ANALYSIS
+Examine the role of a specific catalyst in a specific process,ANALYSIS
+Review the history of a specific military conflict,ANALYSIS
+Analyze the themes in a specific religious text,ANALYSIS
+Explain the concepts of a specific logical theorem,ANALYSIS
+Analyze the impact of a specific cultural movement on history,ANALYSIS
+Evaluate the success of a specific technical implementation,ANALYSIS
+Compare the performance of two different web servers,ANALYSIS
+Analyze the data from a specific weather observation,ANALYSIS
+Examine the historical development of a specific scientific field,ANALYSIS
+Review the major themes in a specific historical movement,ANALYSIS
+Analyze the role of a specific organization in a global event,ANALYSIS
+Explain the concepts of a specific chemical theory,ANALYSIS
+Analyze the impact of a specific social policy on society,ANALYSIS
+Evaluate the effectiveness of a specific marketing campaign,ANALYSIS
+Compare the architectures of two different software frameworks,ANALYSIS
+Analyze the results of a specific sociological survey,ANALYSIS
+Review the history of a specific political system,ANALYSIS
+Analyze the themes in a specific choreographic work,ANALYSIS
+Explain the principles of a specific psychological model,ANALYSIS
+Analyze the role of a specific individual in a scientific discovery,ANALYSIS
+Evaluate the quality of a specific literary work,ANALYSIS
+Compare the properties of two different physical materials,ANALYSIS
+Analyze the data from a specific experimental trial,ANALYSIS
+Examine the role of a specific feature in a specific design,ANALYSIS
+Review the history of a specific social practice,ANALYSIS
+Analyze the themes in a specific graphic novel,ANALYSIS
+Explain the concepts of a specific linguistic theory,ANALYSIS
+Analyze the impact of a specific political change on society,ANALYSIS
+Evaluate the success of a specific community project,ANALYSIS
+Compare the features of two different programming languages,ANALYSIS
+Analyze the results of a specific archaeological excavation,ANALYSIS
+Examine the role of a specific element in a specific system,ANALYSIS
+Review the history of a specific medical discovery,ANALYSIS
+Analyze the themes in a specific documentary,ANALYSIS
+Explain the principles of a specific legal theory,ANALYSIS
+Analyze the impact of a specific economic change on history,ANALYSIS
+Evaluate the quality of a specific design project,ANALYSIS
+Compare the methodologies of two different scientific studies,ANALYSIS
+Analyze the data from a specific user feedback survey,ANALYSIS
+Examine the role of a specific component in a specific machine,ANALYSIS
+Review the history of a specific cultural tradition,ANALYSIS
+Analyze the themes in a specific podcast,ANALYSIS
+Explain the concepts of a specific mathematical model,ANALYSIS
+Analyze the impact of a specific technological change on history,ANALYSIS
+Evaluate the success of a specific industrial project,ANALYSIS
+Compare the performance of two different network protocols,ANALYSIS
+Analyze the data from a specific environmental sensor,ANALYSIS
+Examine the historical development of a specific philosophical idea,ANALYSIS
+Review the major themes in a specific artistic movement,ANALYSIS
+Analyze the role of a specific technology in a global process,ANALYSIS
+Explain the concepts of a specific biological theory,ANALYSIS
+Analyze the impact of a specific public policy on history,ANALYSIS
+Evaluate the effectiveness of a specific communication strategy,ANALYSIS
+Compare the architectures of two different hardware platforms,ANALYSIS
+Analyze the results of a specific economic simulation,ANALYSIS
+Review the history of a specific educational system,ANALYSIS
+Analyze the themes in a specific architectural project,ANALYSIS
+Explain the principles of a specific sociological model,ANALYSIS
+Analyze the role of a specific individual in a cultural movement,ANALYSIS
+Evaluate the quality of a specific artistic performance,ANALYSIS
+Compare the properties of two different biological systems,ANALYSIS
+Analyze the data from a specific clinical trial,ANALYSIS
+Examine the role of a specific characteristic in a specific species,ANALYSIS
+Review the history of a specific religious tradition,ANALYSIS
+Analyze the themes in a specific film series,ANALYSIS
+Explain the concepts of a specific scientific paradigm,ANALYSIS
+Analyze the impact of a specific social change on history,ANALYSIS
+Evaluate the success of a specific scientific project,ANALYSIS
+Hi! How are you doing today?,CHAT
+Tell me a joke,CHAT
+What is your name?,CHAT
+Thanks for the help!,CHAT
+Hello there!,CHAT
+I'm feeling a bit tired today,CHAT
+"Good morning, what's up?",CHAT
+That's hilarious!,CHAT
+Can we just talk for a bit?,CHAT
+Goodbye and have a good night!,CHAT
+How was your day?,CHAT
+What are you doing?,CHAT
+Do you like music?,CHAT
+What's the weather like?,CHAT
+Tell me something interesting,CHAT
+Are you a human?,CHAT
+What can you do?,CHAT
+Nice to meet you,CHAT
+How old are you?,CHAT
+What's your favorite color?,CHAT
+"I'm bored, let's talk",CHAT
+Could you help me with something?,CHAT
+What's the meaning of life?,CHAT
+Tell me a story,CHAT
+How do you feel?,CHAT
+Do you have any hobbies?,CHAT
+What's your favorite food?,CHAT
+Can you speak other languages?,CHAT
+What's your purpose?,CHAT
+Who created you?,CHAT
+I'm happy today,CHAT
+I'm sad today,CHAT
+I'm angry today,CHAT
+I'm confused,CHAT
+I'm excited!,CHAT
+I'm nervous,CHAT
+I'm suprised,CHAT
+I'm curious,CHAT
+I'm grateful,CHAT
+I'm lonely,CHAT
+What's up?,CHAT
+How's it going?,CHAT
+What's new?,CHAT
+Yo!,CHAT
+Hey!,CHAT
+Greetings,CHAT
+Salutations,CHAT
+Howdy!,CHAT
+Hiya!,CHAT
+Sup?,CHAT
+See ya later,CHAT
+Take care,CHAT
+Catch you later,CHAT
+Have a good one,CHAT
+Bye for now,CHAT
+Peace!,CHAT
+So long,CHAT
+Farewell,CHAT
+Cheers!,CHAT
+Adios,CHAT
+I love you,CHAT
+I hate you,CHAT
+You're smart,CHAT
+You're funny,CHAT
+You're helpful,CHAT
+You're annoying,CHAT
+You're amazing!,CHAT
+You're boring,CHAT
+You're weird,CHAT
+You're cool,CHAT
+What time is it?,CHAT
+Where are you?,CHAT
+Who are you?,CHAT
+What are you?,CHAT
+How are you?,CHAT
+Are you okay?,CHAT
+Are you busy?,CHAT
+Are you real?,CHAT
+Are you a bot?,CHAT
+Are you an AI?,CHAT
+I have a question,CHAT
+Can you tell me more?,CHAT
+Explain yourself,CHAT
+I don't understand,CHAT
+Can you repeat that?,CHAT
+What do you mean?,CHAT
+I agree,CHAT
+I disagree,CHAT
+Maybe,CHAT
+I'm not sure,CHAT
+Of course!,CHAT
+Definitely,CHAT
+Absolutely,CHAT
+No way,CHAT
+Really?,CHAT
+Wow!,CHAT
+Oh!,CHAT
+Ah!,CHAT
+Hm...,CHAT
+Ugh,CHAT
+Lol,CHAT
+Lmao,CHAT
+Rofl,CHAT
+Omg,CHAT
+Wtf?,CHAT
+Brb,CHAT
+Ttyl,CHAT
+Gtg,CHAT
+Idk,CHAT
+Ikr,CHAT
+Please,CHAT
+No problem,CHAT
+You're welcome,CHAT
+Excuse me,CHAT
+Pardon me,CHAT
+Sorry,CHAT
+My apologies,CHAT
+Congratulations!,CHAT
+Happy birthday!,CHAT
+Good luck!,CHAT
+Best of luck!,CHAT
+I'm proud of you,CHAT
+Keep it up!,CHAT
+Way to go!,CHAT
+Good job!,CHAT
+Excellent!,CHAT
+Perfect!,CHAT
+What do you think?,CHAT
+Do you agree?,CHAT
+Is it true?,CHAT
+Is it possible?,CHAT
+Is it right?,CHAT
+Is it good?,CHAT
+Is it bad?,CHAT
+Is it far?,CHAT
+Is it near?,CHAT
+Is it big?,CHAT
+Is it small?,CHAT
+Is it fast?,CHAT
+Is it slow?,CHAT
+Is it hot?,CHAT
+Is it cold?,CHAT
+Is it expensive?,CHAT
+Is it cheap?,CHAT
+Is it easy?,CHAT
+Is it hard?,CHAT
+I want to know,CHAT
+I need help,CHAT
+I'm looking for,CHAT
+Tell me more about,CHAT
+Show me,CHAT
+Find me,CHAT
+Get me,CHAT
+Make me,CHAT
+Give me,CHAT
+I like,CHAT
+I don't like,CHAT
+I want,CHAT
+I don't want,CHAT
+I need,CHAT
+I don't need,CHAT
+I hope,CHAT
+I don't hope,CHAT
+I wish,CHAT
+I don't wish,CHAT
+I believe,CHAT
+I don't believe,CHAT
+I think,CHAT
+I don't think,CHAT
+I know,CHAT
+I don't know,CHAT
+I'm going to,CHAT
+I'm not going to,CHAT
+I can,CHAT
+I can't,CHAT
+I will,CHAT
+I won't,CHAT
+I might,CHAT
+I might not,CHAT
+I should,CHAT
+I shouldn't,CHAT
+I would,CHAT
+I wouldn't,CHAT
+I must,CHAT
+I must not,CHAT
+I have to,CHAT
+I don't have to,CHAT
+Can I?,CHAT
+May I?,CHAT
+Should I?,CHAT
+Would you?,CHAT
+Could you?,CHAT
+Will you?,CHAT
+Are you?,CHAT
+Is he?,CHAT
+Is she?,CHAT
+Is it?,CHAT
+Are we?,CHAT
+Are they?,CHAT
+I'm sorry to hear that,CHAT
+That's great!,CHAT
+That's too bad,CHAT
+That's interesting,CHAT
+That's funny,CHAT
+That's okay,CHAT
+That's fine,CHAT
+That's life,CHAT
+That's how it is,CHAT
+That's not right,CHAT
+Write a short Sci-Fi story about a robot who learns to paint,CREATIVE
+Compose a poem about the autumn leaves,CREATIVE
+Give me 5 creative names for a pet turtle,CREATIVE
+Draft a compelling intro for my fantasy novel,CREATIVE
+Imagine a world where humans sleep for 100 years. Write a scene.,CREATIVE
+Write dialogue between two wizards arguing over a sandwich,CREATIVE
+Design a new mythical creature and describe its habitat,CREATIVE
+Write a catchy slogan for a coffee shop that only opens at midnight,CREATIVE
+Create a plot twist for a mystery story about a stolen painting,CREATIVE
+Write a haiku about programming,CREATIVE
+Compose a song lyric about unrequited love,CREATIVE
+Write a script for a short film about a time traveler,CREATIVE
+Describe a magical forest in vivid detail,CREATIVE
+Create a character profile for a space pirate,CREATIVE
+Write a series of metaphors for the ocean,CREATIVE
+Brainstorm ideas for a new board game,CREATIVE
+Write a flash fiction piece about a ghost,CREATIVE
+Compose a limerick about a cat and a mouse,CREATIVE
+Write a dramatic monologue for an actor,CREATIVE
+Create a lore snippet for a fantasy world,CREATIVE
+Write a humorous essay about the struggles of adulting,CREATIVE
+Describe a futuristic city in the clouds,CREATIVE
+Create a brand identity for a sustainable fashion company,CREATIVE
+Write a letter from a historical figure to their future self,CREATIVE
+Compose a sonnet about the beauty of nature,CREATIVE
+Write a review for a fictional video game,CREATIVE
+Describe a dream you had in a surreal style,CREATIVE
+Create a recipe for a magical potion,CREATIVE
+Write a travel guide for a planet in a different galaxy,CREATIVE
+Compose a bedtime story for children,CREATIVE
+Write a philosophical dialogue about the nature of time,CREATIVE
+Describe a peculiar antique shop and its owner,CREATIVE
+Create a marketing slogan for a new smartphone,CREATIVE
+Write a satirical news article about a local event,CREATIVE
+Compose a poem in the style of Robert Frost,CREATIVE
+Write a scene from a play about a family reunion,CREATIVE
+Describe a bustling marketplace in a fantasy setting,CREATIVE
+Create a backstory for a legendary weapon,CREATIVE
+Write a short story from the perspective of a dog,CREATIVE
+Compose a rap about the joys of learning,CREATIVE
+Write a series of similes for the sun,CREATIVE
+Brainstorm ideas for a new social media platform,CREATIVE
+Write a suspenseful opening for a thriller novel,CREATIVE
+Compose a ballad about a tragic hero,CREATIVE
+Write a speech for a revolutionary leader,CREATIVE
+Create a map description for a mysterious island,CREATIVE
+Write a humorous dialogue between a cat and a vacuum cleaner,CREATIVE
+Describe a post-apocalyptic world in a few sentences,CREATIVE
+Create a brand name for a new biotech startup,CREATIVE
+Write a short story about a person who can talk to trees,CREATIVE
+Compose a poem about the stillness of night,CREATIVE
+Write a review for a concert you just attended,CREATIVE
+Describe a first encounter with an alien species,CREATIVE
+Create a hero origin story for a superhero,CREATIVE
+Write a series of proverbs for a wise elder,CREATIVE
+Brainstorm ideas for a new mobile app,CREATIVE
+Write a mystery plot about a locked room puzzle,CREATIVE
+Compose a sea shanty about a pirate's life,CREATIVE
+Write a motivational speech for a sports team,CREATIVE
+Describe a secret garden hidden behind a stone wall,CREATIVE
+Create a recipe for a dish from a fictional culture,CREATIVE
+Write a short story about a world where color doesn't exist,CREATIVE
+Compose a poem about the fleeting nature of youth,CREATIVE
+Write a review for a movie you just saw,CREATIVE
+Describe a futuristic transportation system,CREATIVE
+Create a character for a Dungeons & Dragons campaign,CREATIVE
+Write a series of aphorisms about life,CREATIVE
+Brainstorm ideas for a new video game genre,CREATIVE
+Write a scene from a sitcom about a workplace,CREATIVE
+Describe a magical object and its powers,CREATIVE
+Create a brand mission statement for a social enterprise,CREATIVE
+Write a short story about a time when everything went wrong,CREATIVE
+Compose a poem about the power of friendship,CREATIVE
+Write a review for a book you just finished,CREATIVE
+Describe a world where magic is common,CREATIVE
+Create a backstory for a villain in a story,CREATIVE
+Write a series of riddles for a sphinx,CREATIVE
+Brainstorm ideas for a new fashion trend,CREATIVE
+Write a suspenseful scene about a chase,CREATIVE
+Compose a lullaby for a baby,CREATIVE
+Write a speech for a graduation ceremony,CREATIVE
+Describe a beautiful sunset over the mountains,CREATIVE
+Create a recipe for a healthy smoothie,CREATIVE
+Write a short story about a person who discovers a secret,CREATIVE
+Compose a poem about the journey of life,CREATIVE
+Write a review for a restaurant you just visited,CREATIVE
+Describe a world where animals can talk,CREATIVE
+Create a character portrait for a historical figure,CREATIVE
+Write a series of quotes about love,CREATIVE
+Brainstorm ideas for a new business venture,CREATIVE
+Write a humorous scene about a misunderstanding,CREATIVE
+Describe a majestic castle on a cliff,CREATIVE
+Create a brand slogan for a luxury car company,CREATIVE
+Write a short story about a magical adventure,CREATIVE
+Compose a poem about the beauty of a morning,CREATIVE
+Write a review for a new tech product,CREATIVE
+Describe a world where technology is advanced,CREATIVE
+Create a backstory for a mysterious traveler,CREATIVE
+Write a series of questions for a philosopher,CREATIVE
+Brainstorm ideas for a new artistic project,CREATIVE
+Write a suspenseful scene about a discovery,CREATIVE
+Compose a song about the freedom of the open road,CREATIVE
+Write a speech for a wedding toast,CREATIVE
+Describe a tranquil lake in a mountain valley,CREATIVE
+Create a recipe for a delicious dessert,CREATIVE
+Write a short story about a journey through a desert,CREATIVE
+Compose a poem about the strength of the human spirit,CREATIVE
+Write a review for a theater performance,CREATIVE
+Describe a world where people live underwater,CREATIVE
+Create a character for a steampunk story,CREATIVE
+Write a series of observations about human behavior,CREATIVE
+Brainstorm ideas for a new product design,CREATIVE
+Write a humorous scene about a daily routine,CREATIVE
+Describe a futuristic laboratory,CREATIVE
+Create a brand identity for a new coffee brand,CREATIVE
+Write a short story about a world where dreams come true,CREATIVE
+Compose a poem about the magic of the winter,CREATIVE
+Write a review for a music album,CREATIVE
+Describe a world where time flies,CREATIVE
+Create a backstory for a legendary hero,CREATIVE
+Write a series of pieces of advice for a young person,CREATIVE
+Brainstorm ideas for a new creative writing prompt,CREATIVE
+Write a suspenseful scene about an escape,CREATIVE
+Compose a song about the beauty of the stars,CREATIVE
+Write a speech for a funeral,CREATIVE
+Describe a serene garden at dawn,CREATIVE
+Create a recipe for a traditional meal,CREATIVE
+Write a short story about a voyage across the ocean,CREATIVE
+Compose a poem about the power of hope,CREATIVE
+Write a review for an art exhibition,CREATIVE
+Describe a world where plants are giant,CREATIVE
+Create a character for a cyberpunk world,CREATIVE
+Write a series of truths about the world,CREATIVE
+Brainstorm ideas for a new invention,CREATIVE
+Write a humorous scene about a pet,CREATIVE
+Describe a futuristic space station,CREATIVE
+Create a brand slogan for a travel agency,CREATIVE
+Write a short story about an unexpected event,CREATIVE
+Compose a poem about the wonder of a new day,CREATIVE
+Write a review for a mobile game,CREATIVE
+Describe a world where humans have wings,CREATIVE
+Create a backstory for a mythical creature,CREATIVE
+Write a series of lessons learned from experience,CREATIVE
+Brainstorm ideas for a new marketing campaign,CREATIVE
+Write a suspenseful scene about a hidden place,CREATIVE
+Compose a song about the warmth of a home,CREATIVE
+Write a speech for an anniversary,CREATIVE
+Describe a peaceful village in a valley,CREATIVE
+Create a recipe for a festive treat,CREATIVE
+Write a short story about a discovery in the woods,CREATIVE
+Compose a poem about the cycles of nature,CREATIVE
+Write a review for a documentary film,CREATIVE
+Describe a world where people can teleport,CREATIVE
+Create a character for a space opera,CREATIVE
+Write a series of thoughts on the nature of reality,CREATIVE
+Brainstorm ideas for a new educational tool,CREATIVE
+Write a humorous scene about a family dinner,CREATIVE
+Describe a futuristic mega-city,CREATIVE
+Create a brand identity for a new technology company,CREATIVE
+Write a short story about a world where everything is perfect,CREATIVE
+Compose a poem about the mysteries of the universe,CREATIVE
+Write a review for a classical music concert,CREATIVE
+Describe a world where color determines your status,CREATIVE
+Create a backstory for a mysterious artifact,CREATIVE
+Write a series of reflections on the purpose of art,CREATIVE
+Brainstorm ideas for a new community project,CREATIVE
+Write a suspenseful scene about a secret meeting,CREATIVE
+Compose a song about the joy of a reunion,CREATIVE
+Write a speech for a political rally,CREATIVE
+Describe a mystical landscape in the moonlight,CREATIVE
+Create a recipe for a gourmet dish,CREATIVE
+Write a short story about a world where music is illegal,CREATIVE
+Compose a poem about the beauty of a rainy day,CREATIVE
+Write a review for a ballet performance,CREATIVE
+Describe a world where knowledge is power,CREATIVE
+Create a character for a noir story,CREATIVE
+Write a series of questions for a scientist,CREATIVE
+Brainstorm ideas for a new scientific experiment,CREATIVE
+Write a humorous scene about a travel adventure,CREATIVE
+Describe a futuristic underwater base,CREATIVE
+Create a brand slogan for a new sports brand,CREATIVE
+Write a short story about a mysterious discovery,CREATIVE
+Compose a poem about the magic of a summer night,CREATIVE
+Write a review for a jazz concert,CREATIVE
+Describe a world where every word you speak is heard by everyone,CREATIVE
+Create a backstory for an ancient legend,CREATIVE
+Write a series of observations about the natural world,CREATIVE
+Brainstorm ideas for a new social media challenge,CREATIVE
+Write a suspenseful scene about a dark secret,CREATIVE
+Extract all the email addresses from the text above,EXTRACTION
+Can you convert this unstructured text into a JSON object?,EXTRACTION
+Pull out the names and phone numbers from this document,EXTRACTION
+Format this messy list into a clean CSV format,EXTRACTION
+Identify all the dates mentioned in the article,EXTRACTION
+"Extract the key entities (people, places, organizations) from this news report",EXTRACTION
+Parse this HTML block and return the links,EXTRACTION
+Convert these bullet points into a python dictionary,EXTRACTION
+Extract the total invoice amount and due date from this email,EXTRACTION
+Find all the IP addresses in this log file,EXTRACTION
+Identify the main themes and topics in this transcript,EXTRACTION
+Extract the ingredient list and cooking instructions from this recipe,EXTRACTION
+Convert this meeting recording into a bulleted summary,EXTRACTION
+Pull the product specifications from this technical manual,EXTRACTION
+Identify the speakers and their contributions in this conversation,EXTRACTION
+Extract the citations and references from this academic paper,EXTRACTION
+Convert this table from a PDF into an Excel spreadsheet,EXTRACTION
+Identify the action items and deadlines from this meeting notes,EXTRACTION
+Extract the location and time information from this event flyer,EXTRACTION
+Convert this hand-written note into a digital text document,EXTRACTION
+Identify the different sections and sub-headers in this report,EXTRACTION
+Extract the contact information from these business cards,EXTRACTION
+Convert this list of ingredients into a grocery list format,EXTRACTION
+Identify the key terms and definitions in this textbook chapter,EXTRACTION
+Extract the sentiment and emotions from these customer reviews,EXTRACTION
+Convert this unstructured data into a structured database schema,EXTRACTION
+Identify the different types of data in this dataset,EXTRACTION
+Extract the specific keywords and tags from this blog post,EXTRACTION
+Convert this messy dataset into a clean and organized format,EXTRACTION
+Identify the outliers and anomalies in this data stream,EXTRACTION
+Extract the metadata and properties from these image files,EXTRACTION
+Convert this list of events into a chronological timeline,EXTRACTION
+Identify the main arguments and counter-arguments in this essay,EXTRACTION
+Extract the specific quotes and excerpts from this book,EXTRACTION
+Convert this unstructured feedback into a categorized list,EXTRACTION
+Identify the different categories and sub-categories in this catalog,EXTRACTION
+Extract the specific details and specifications from this product listing,EXTRACTION
+Convert this messy spreadsheet into a clean and tidy format,EXTRACTION
+Identify the correlations and patterns in this data set,EXTRACTION
+Extract the specific data points and values from this chart,EXTRACTION
+Convert this list of requirements into a project plan format,EXTRACTION
+Identify the key stakeholders and their roles in this project,EXTRACTION
+Extract the specific outcomes and results from this study,EXTRACTION
+Convert this unstructured information into a comprehensive guide,EXTRACTION
+Identify the different levels and stages in this process,EXTRACTION
+Extract the specific rules and regulations from this policy document,EXTRACTION
+Convert this list of tasks into a daily schedule format,EXTRACTION
+Identify the key features and benefits of this product from the text,EXTRACTION
+Extract the specific terms and conditions from this contract,EXTRACTION
+Convert this messy data into a professional report format,EXTRACTION
+Identify the trends and forecasts in this market analysis,EXTRACTION
+Extract the specific insights and recommendations from this audit,EXTRACTION
+Convert this list of resources into a resource map format,EXTRACTION
+Identify the key elements and structures in this architectural plan,EXTRACTION
+Extract the specific values and measurements from this technical drawing,EXTRACTION
+Convert this list into a JSON string,EXTRACTION
+Identify all the URLs in this document,EXTRACTION
+Extract the phone numbers from this text,EXTRACTION
+Convert this CSV into a JSON array,EXTRACTION
+Identify the main topics in this article,EXTRACTION
+Extract the dates from this email,EXTRACTION
+Convert this table into a list of dictionaries,EXTRACTION
+Identify the key points in this summary,EXTRACTION
+Extract the addresses from this document,EXTRACTION
+Convert this XML into a JSON object,EXTRACTION
+Identify the different parts of speech in this sentence,EXTRACTION
+Extract the named entities from this news story,EXTRACTION
+Convert this list of names into a standard format,EXTRACTION
+Identify the different languages used in this text,EXTRACTION
+Extract the currency values from this document,EXTRACTION
+Convert this meeting transcript into a structured summary,EXTRACTION
+Identify all the bold text in this document,EXTRACTION
+Extract the captions from these images,EXTRACTION
+Convert this list of ingredients into a nutrition label format,EXTRACTION
+Identify the different sections of this legal document,EXTRACTION
+Extract the specific citations from this research paper,EXTRACTION
+Convert this list of coordinates into a map format,EXTRACTION
+Identify the key themes in this collection of poems,EXTRACTION
+Extract the metadata from this audio file,EXTRACTION
+Convert this list of requirements into a test plan format,EXTRACTION
+Identify the different stages of this workflow from the text,EXTRACTION
+Extract the specific instructions from this user manual,EXTRACTION
+Convert this list of items into a catalog format,EXTRACTION
+Identify the main arguments in this opinion piece,EXTRACTION
+Extract the specific data from this web page,EXTRACTION
+Convert this list of events into a calendar format,EXTRACTION
+Identify the different types of media in this document,EXTRACTION
+Extract the specific quotes from this famous speech,EXTRACTION
+Convert this list of terms into a glossary format,EXTRACTION
+Identify the key stakeholders from this project report,EXTRACTION
+Extract the specific outcomes from this experimental report,EXTRACTION
+Convert this list of coordinates into a KML file,EXTRACTION
+Identify the different components of this system from the description,EXTRACTION
+Extract the specific results from this clinical trial report,EXTRACTION
+Convert this list of assets into a financial report format,EXTRACTION
+Identify the main ideas in this chapter,EXTRACTION
+Extract the specific values from this measurement report,EXTRACTION
+Convert this list of tasks into a project timeline,EXTRACTION
+Identify the different levels of this organization from the text,EXTRACTION
+Extract the specific rules from this game manual,EXTRACTION
+Convert this list of specifications into a data sheet,EXTRACTION
+Identify all the capitalized words in this text,EXTRACTION
+Extract the time signatures from this music score,EXTRACTION
+Convert this list of contacts into a vCard format,EXTRACTION
+Identify the different roles in this process from the description,EXTRACTION
+Extract the specific data from this sensor log,EXTRACTION
+Convert this list of observations into a scientific report,EXTRACTION
+Identify the key points in this presentation,EXTRACTION
+Extract the specific details from this job description,EXTRACTION
+Convert this list of items into an inventory format,EXTRACTION
+Identify the different categories in this survey report,EXTRACTION
+Extract the specific data from this log file,EXTRACTION
+Convert this list of events into a historical timeline,EXTRACTION
+Identify the main themes in this movie review,EXTRACTION
+Extract the specific values from this financial statement,EXTRACTION
+Convert this list of requirements into a project proposal,EXTRACTION
+Identify the key elements of this design from the text,EXTRACTION
+Extract the specific results from this audit report,EXTRACTION
+Convert this list of data points into a chart or graph format,EXTRACTION
+Identify the different types of cells in this biological report,EXTRACTION
+Extract the specific dates and times from this event schedule,EXTRACTION
+Convert this list of names into an alphabetical directory,EXTRACTION
+Identify the main topics in this podcast transcript,EXTRACTION
+Extract the specific data from this experiment report,EXTRACTION
+Convert this list of tasks into a daily to-do list,EXTRACTION
+Identify the key stakeholders in this project plan,EXTRACTION
+Extract the specific results from this study report,EXTRACTION
+Convert this list of items into a shopping list,EXTRACTION
+Identify the main themes in this artistic review,EXTRACTION
+Extract the specific values from this appraisal report,EXTRACTION
+Convert this list of ingredients into a menu format,EXTRACTION
+Identify the different parts of this machine from the description,EXTRACTION
+Extract the specific data from this research log,EXTRACTION
+Convert this list of observations into a field report,EXTRACTION
+Identify the key elements in this design document,EXTRACTION
+Extract the specific details from this request for proposal,EXTRACTION
+Convert this list of items into a price list,EXTRACTION
+Identify the different categories in this product catalog,EXTRACTION
+Extract the specific data from this monitoring report,EXTRACTION
+Convert this list of events into a chronological report,EXTRACTION
+Identify the main themes in this literature review,EXTRACTION
+Extract the specific values from this report,EXTRACTION
+Convert this list of requirements into a technical specification,EXTRACTION
+Identify the key elements of this architecture from the description,EXTRACTION
+Extract the specific results from this investigation report,EXTRACTION
+Convert this list of data into a summary report,EXTRACTION
+Identify the different species in this biological study,EXTRACTION
+Extract the specific dates and times from this meeting schedule,EXTRACTION
+Convert this list of names into a mailing list,EXTRACTION
+Identify the main topics in this interview transcript,EXTRACTION
+Extract the specific data from this test report,EXTRACTION
+Convert this list of tasks into a project schedule,EXTRACTION
+Identify the key stakeholders in this implementation plan,EXTRACTION
+Extract the specific results from this analytical report,EXTRACTION
+Convert this list of items into a packing list,EXTRACTION
+Identify the main themes in this cultural analysis,EXTRACTION
+Extract the specific values from this assessment report,EXTRACTION
+Convert this list of ingredients into a recipe format,EXTRACTION
+Identify the different parts of this system from the blueprint,EXTRACTION
+Extract the specific data from this survey dataset,EXTRACTION
+Convert this list of observations into an analysis report,EXTRACTION
+Identify the key elements in this strategic plan,EXTRACTION
+Extract the specific details from this project charter,EXTRACTION
+Convert this list of items into an asset register,EXTRACTION
+Identify the different categories in this classification report,EXTRACTION
+Extract the specific data from this audit log,EXTRACTION
+Convert this list of events into a narrative history,EXTRACTION
+Identify the main themes in this news analysis,EXTRACTION
+Extract the specific values from this performance report,EXTRACTION
+Convert this list of requirements into a design document,EXTRACTION
+Identify the key elements of this design from the blueprint,EXTRACTION
+Extract the specific results from this validation report,EXTRACTION
+Convert this list of data into a technical report,EXTRACTION
+Identify the different types of cells in this medical report,EXTRACTION
+Extract the specific dates and times from this conference program,EXTRACTION
+Convert this list of names into an contact directory,EXTRACTION
+Identify the main topics in this speech transcript,EXTRACTION
+Extract the specific data from this simulation report,EXTRACTION
+Convert this list of tasks into a workflow diagram description,EXTRACTION
+Identify the key stakeholders in this change management plan,EXTRACTION
+Extract the specific results from this feasibility study,EXTRACTION
+Convert this list of items into a components list,EXTRACTION
+Identify the main themes in this sociological report,EXTRACTION
+Extract the specific values from this compliance report,EXTRACTION
+Convert this list of ingredients into a nutritional chart,EXTRACTION
+Identify the different parts of this vehicle from the technical manual,EXTRACTION
+Extract the specific data from this field observation log,EXTRACTION
+Convert this list of observations into a case study,EXTRACTION
+Identify the key elements in this business plan,EXTRACTION
+Extract the specific details from this grant proposal,EXTRACTION
+Convert this list of items into a resource inventory,EXTRACTION
+Identify the different categories in this taxonomic report,EXTRACTION
+Extract the specific data from this logging report,EXTRACTION
+Calculate 455 * 89 / 3,UTILITY
+Convert 50 miles to kilometers,UTILITY
+What is 20% of 850?,UTILITY
+Format this string to be uppercase,UTILITY
+Count the number of words in this paragraph,UTILITY
+What is the square root of 144?,UTILITY
+Convert this timestamp to PST,UTILITY
+Generate a random UUID,UTILITY
+Translate 'hello world' to French,UTILITY
+"Sort this alphabetical list: zebra, apple, mango",UTILITY
+Reverse this string: 'Antigravity',UTILITY
+Find the GCD of 48 and 180,UTILITY
+What is the hexadecimal value of 255?,UTILITY
+Convert 100 Celsius to Fahrenheit,UTILITY
+What is the binary representation of 42?,UTILITY
+Capitalize the first letter of each word in this sentence,UTILITY
+Find the character at index 5 of this string,UTILITY
+What is the absolute value of -50?,UTILITY
+Convert 500 grams to ounces,UTILITY
+What is the area of a circle with radius 5?,UTILITY
+"Find the average of the following numbers: 1, 2, 3, 4, 5",UTILITY
+Identify the type of this variable: '123',UTILITY
+What is the current Unix timestamp?,UTILITY
+Check if this string is a valid email address,UTILITY
+"Find the minimum value among: 10, 20, 5, 30",UTILITY
+Generate a random number between 1 and 100,UTILITY
+Convert 1 liter to gallons,UTILITY
+What is the value of pi to 5 decimal places?,UTILITY
+Remove all whitespace from this string,UTILITY
+Check if this number is a prime number: 17,UTILITY
+"Sort this numeric list in ascending order: 5, 2, 8, 1, 9",UTILITY
+Translate 'thank you' to Spanish,UTILITY
+"Find the index of 'apple' in this list: ['banana', 'apple', 'cherry']",UTILITY
+What is the power of 2 to the 10th?,UTILITY
+Convert 24 hours to seconds,UTILITY
+Find the longest word in this sentence,UTILITY
+Check if this year is a leap year: 2024,UTILITY
+Convert this JSON string into a Python object,UTILITY
+Find the sum of all even numbers from 1 to 100,UTILITY
+Translate 'goodbye' to German,UTILITY
+Identify the data type of the value: True,UTILITY
+What is the result of 15 modulus 4?,UTILITY
+Convert 10 kilometers per hour to miles per hour,UTILITY
+Find the number of occurrences of 'a' in this string,UTILITY
+Check if this string starts with 'Hello',UTILITY
+Generate a random password with 10 characters,UTILITY
+Convert 500 dollars to euros using a static rate,UTILITY
+What is the perimeter of a rectangle with length 10 and width 5?,UTILITY
+"Find the median of the following list: 10, 20, 30",UTILITY
+Check if this string is all numeric,UTILITY
+Convert 1 megabyte to kilobytes,UTILITY
+Find the smallest prime number greater than 100,UTILITY
+Translate 'please' to Italian,UTILITY
+Identify the file extension of: 'document.pdf',UTILITY
+What is the value of e?,UTILITY
+Check if this string is a palindrome: 'level',UTILITY
+Convert 1000 milliseconds to seconds,UTILITY
+Find the root of the equation x^2 - 4 = 0,UTILITY
+Generate a random hex color code,UTILITY
+Convert 1 bit to bytes,UTILITY
+Find the character code of 'A',UTILITY
+What is the sine of 90 degrees?,UTILITY
+Check if this date is a weekend: 2024-04-20,UTILITY
+Convert 5 pounds to kilograms,UTILITY
+What is the volume of a cube with side 3?,UTILITY
+"Find the standard deviation of the following set: 10, 20, 30",UTILITY
+Identify the domain of this URL: 'https://example.com/path',UTILITY
+What is the result of bitwise AND of 5 and 3?,UTILITY
+Convert 1 minute to milliseconds,UTILITY
+Find the first prime number,UTILITY
+Translate 'welcome' to Japanese,UTILITY
+Check if this number is a perfect square: 25,UTILITY
+"Sort this numeric list in descending order: 5, 2, 8, 1, 9",UTILITY
+What is the value of 5 factorial?,UTILITY
+Convert 1000 meters to feet,UTILITY
+Find the number of words in this text file,UTILITY
+"Check if this point (1, 2) is inside a circle with center (0, 0) and radius 3",UTILITY
+Convert this decimal to a binary number,UTILITY
+Find the sum of all elements in this matrix,UTILITY
+Translate 'yes' to Chinese,UTILITY
+Identify the class of this object,UTILITY
+What is the current time in London?,UTILITY
+Check if this email is already in the list,UTILITY
+Find the maximum value of a specific column in this CSV file,UTILITY
+Generate a random sample from this population,UTILITY
+Convert 1 gigabyte to megabytes,UTILITY
+What is the base 2 logarithm of 1024?,UTILITY
+Check if this string contains only spaces,UTILITY
+Convert 1 cubic meter to liters,UTILITY
+Find the second largest number in this list,UTILITY
+Translate 'no' to Korean,UTILITY
+Identify the type of this encoding,UTILITY
+What is the time difference between UTC and PST?,UTILITY
+Check if this file is readable,UTILITY
+Find the sum of the squares of the first 10 integers,UTILITY
+Generate a random string of 5 characters,UTILITY
+Convert 1 year to hours,UTILITY
+Find the most common character in this string,UTILITY
+Translate 'friend' to French,UTILITY
+Check if this number is odd,UTILITY
+What is 10 raised to the power of 5?,UTILITY
+Convert 1 gallon to liters,UTILITY
+Find the average of a list of floats,UTILITY
+Check if this string is a valid URL,UTILITY
+Translate 'help' to Russian,UTILITY
+What is the 5th element in this list?,UTILITY
+Convert 1 centimeter to inches,UTILITY
+Find the number of unique characters in this string,UTILITY
+Check if this date is in the future,UTILITY
+Translate 'beautiful' to Italian,UTILITY
+What is the tangent of 45 degrees?,UTILITY
+Convert 1 ton to pounds,UTILITY
+Find the product of all elements in this list,UTILITY
+Check if this string is empty,UTILITY
+Translate 'school' to German,UTILITY
+What is the result of 10 / 3?,UTILITY
+Convert 1 mile to feet,UTILITY
+Find the smallest value in this list,UTILITY
+Check if this string is in lowercase,UTILITY
+Translate 'life' to Spanish,UTILITY
+What is the value of 0!,UTILITY
+Convert 1 yard to meters,UTILITY
+Find the number of vowels in this string,UTILITY
+Check if this point is on the line y = 2x,UTILITY
+Translate 'world' to Portuguese,UTILITY
+What is the 100th prime number?,UTILITY
+Convert 1 knot to miles per hour,UTILITY
+Find the sum of all digits in this number,UTILITY
+Check if this string ends with a period,UTILITY
+Translate 'love' to Greek,UTILITY
+What is the cosine of 0 degrees?,UTILITY
+Convert 1 calorie to joules,UTILITY
+Find the median of a large dataset,UTILITY
+Check if this string is all uppercase,UTILITY
+Translate 'family' to Arabic,UTILITY
+What is the result of 2^3 + 4^2?,UTILITY
+Convert 1 atmosphere to pascals,UTILITY
+Find the range of this list of numbers,UTILITY
+Check if this string contains a specific substring,UTILITY
+Translate 'work' to Turkish,UTILITY
+What is the 3rd root of 27?,UTILITY
+Convert 1 hectare to acres,UTILITY
+Find the count of negative numbers in this list,UTILITY
+Check if this string is a valid file path,UTILITY
+Translate 'peace' to Hebrew,UTILITY
+What is the value of ln(1)?,UTILITY
+Convert 1 foot to centimeters,UTILITY
+Find the index of the first occurrence of a character,UTILITY
+Check if this number is a multiple of 5,UTILITY
+Translate 'music' to Hindi,UTILITY
+What is the result of bitwise OR of 10 and 12?,UTILITY
+Convert 1 hour to minutes,UTILITY
+Find the last element in this list,UTILITY
+Check if this string is a valid JSON,UTILITY
+Translate 'happy' to Vietnamese,UTILITY
+What is the 7th Fibonacci number?,UTILITY
+Convert 1 day to hours,UTILITY
+Find the middle character of a string,UTILITY
+Check if this number is positive,UTILITY
+Translate 'sad' to Thai,UTILITY
+What is the area of a rectangle with length 12 and width 8?,UTILITY
+Convert 1 meter to centimeters,UTILITY
+Find the sum of the first 100 natural numbers,UTILITY
+Check if this string contains digits,UTILITY
+Translate 'funny' to Dutch,UTILITY
+What is the square of 25?,UTILITY
+Convert 1 kilogram to grams,UTILITY
+Find the variance of a list of numbers,UTILITY
+Check if this string is a valid hostname,UTILITY
+Translate 'boring' to Swedish,UTILITY
+What is the result of 100 / 0.5?,UTILITY
+Convert 1 inch to millimeters,UTILITY
+Find the smallest prime factor of a number,UTILITY
+Check if this string has no spaces,UTILITY
+Translate 'interesting' to Danish,UTILITY
+What is the log base 10 of 1000?,UTILITY
+Convert 1 millimeter to inches,UTILITY
+Find the absolute difference between two numbers,UTILITY
+Check if this character is a vowel,UTILITY
+Translate 'angry' to Norwegian,UTILITY
+What is the value of 2^8?,UTILITY
+Convert 1 gram to milligrams,UTILITY
+Find the product of the first 5 prime numbers,UTILITY
+Check if this string has at least one capital letter,UTILITY
+Translate 'fast' to Finnish,UTILITY
+What is the floor of 10.7?,UTILITY
+Convert 1 milliliter to liters,UTILITY
+Find the ceiling of 10.1?,UTILITY
+Check if this character is a digit,UTILITY
+Translate 'slow' to Polish,UTILITY
+What is the result of (5+3)*2?,UTILITY
+Convert 1 centiliter to liters,UTILITY
+Find the bitwise XOR of 15 and 7,UTILITY
+Check if this string is a valid HEX color code,UTILITY
+Translate 'hot' to Czech,UTILITY
+What is the log base 10 of 1?,UTILITY
+Convert 1 kiloliter to liters,UTILITY
+Find the sum of the first 50 odd numbers,UTILITY
+Check if this character is a special character,UTILITY
+Translate 'cold' to Hungarian,UTILITY
+What is the value of 10^0?,UTILITY
+Convert 1 deciliter to liters,UTILITY
+Find the first 10 prime numbers,UTILITY
+Check if this character is a punctuation mark,UTILITY
+"I need you to browse the web, find the top 5 news articles, and summarize them",AGENTS
+"Use the calculator tool to find the exact tip amount, then email it to john",AGENTS
+Search my Google Drive for the Q3 report and extract the revenue figures,AGENTS
+Plan a 3-day itinerary for Tokyo and book the flights using the travel API,AGENTS
+"Check the weather in London and if it's raining, send a slack message to the team",AGENTS
+Run a python interpreter and execute this code to plot the graph,AGENTS
+"Orchestrate a workflow to download the dataset, clean it, and train a model",AGENTS
+Use your terminal to find all files larger than 1GB and list them,AGENTS
+"Scrape this website, format the tables, and save it to a PostgreSQL database",AGENTS
+Analyze this repo using grep and find where the API key is hardcoded,AGENTS
+Monitor this server and send an alert if CPU usage exceeds 90%,AGENTS
+Use the calendar API to schedule a meeting with the team next Tuesday,AGENTS
+Automate the process of generating a weekly report from these data files,AGENTS
+Search for the latest research papers on AI and summarize the key findings,AGENTS
+Use the shell to list all the processes running on my machine,AGENTS
+Configure a new AWS instance and deploy this web application,AGENTS
+Orchestrate a multi-agent system to solve a complex problem,AGENTS
+Use a web crawler to find all the links on this website,AGENTS
+Analyze a large dataset using SQL and generate a summary report,AGENTS
+Automate the process of sending personalized emails to a list of contacts,AGENTS
+Use a translation API to translate this document into 5 different languages,AGENTS
+Monitor a website for changes and send a notification when an update occurs,AGENTS
+Use a terminal search tool to find a specific file on my hard drive,AGENTS
+Automate the process of creating a social media post from a blog article,AGENTS
+Search for available flights to a specific destination and book the cheapest one,AGENTS
+Use an image recognition API to identify the objects in these photos,AGENTS
+"Orchestrate a workflow to collect, process, and analyze a stream of data",AGENTS
+Use a shell script to automate a series of system maintenance tasks,AGENTS
+Search for a specific product on an e-commerce site and find the best price,AGENTS
+Automate the process of generating a monthly invoice from a set of records,AGENTS
+Use a natural language processing API to analyze the sentiment of these reviews,AGENTS
+Monitor a news feed for specific keywords and send an alert when they appear,AGENTS
+Use a command-line tool to perform a security audit of a system,AGENTS
+Automate the process of creating a presentation from a set of notes,AGENTS
+Search for a specific piece of information on Wikipedia and summarize it,AGENTS
+Use a mapping API to find the best route between two locations,AGENTS
+"Orchestrate a workflow to capture, edit, and publish a video",AGENTS
+Use a shell command to check the disk space usage on my server,AGENTS
+Search for a specific person on social media and find their contact information,AGENTS
+Automate the process of updating a database from an external data source,AGENTS
+Use a knowledge graph API to find the relationships between different entities,AGENTS
+Monitor a sensor for specific threshold values and trigger an action,AGENTS
+Use a terminal command to find the IP address of a specific website,AGENTS
+Automate the process of generating a daily executive summary,AGENTS
+Search for a specific set of images on the web and download them,AGENTS
+Use a code generation API to write a boilerplate for a new project,AGENTS
+"Orchestrate a workflow to test, build, and deploy a software update",AGENTS
+Use a shell script to automate a system backup process,AGENTS
+Search for a specific financial indicator and plot its trend over time,AGENTS
+Automate the process of creating a customer support ticket from an email,AGENTS
+Use a voice synthesis API to generate an audio version of this text,AGENTS
+Monitor a data feed for anomalies and send a report to the administrator,AGENTS
+Use a command-line tool to convert a file from one format to another,AGENTS
+Automate the process of scheduling a social media campaign,AGENTS
+Search for the latest news on a specific topic and send a daily summary,AGENTS
+Use a translation API to translate a website in real-time,AGENTS
+Orchestrate a multi-step task involving multiple different tools,AGENTS
+Use a shell command to list the files in a specific directory,AGENTS
+Search for a specific app on an app store and find its ratings,AGENTS
+Automate the process of generating a report from a web survey,AGENTS
+Use a sentiment analysis API to monitor a social media stream,AGENTS
+Monitor a system for specific events and log them into a database,AGENTS
+Use a terminal search command to find a specific string in a file,AGENTS
+Automate the process of creating a summary of a YouTube video from its transcript,AGENTS
+Search for a specific type of file on the web and list the results,AGENTS
+Use a language generation API to write a different version of a text,AGENTS
+Orchestrate a workflow to manage a large collection of digital assets,AGENTS
+Use a shell script to automate a recurring system task,AGENTS
+Search for a specific scientific finding and provide a simplified explanation,AGENTS
+Automate the process of generating a weekly summary of a team's progress,AGENTS
+Use an authentication API to manage user login and registration,AGENTS
+Monitor an online forum for specific questions and provide a helpful answer,AGENTS
+Use a command-line tool to perform a data cleaning task,AGENTS
+Automate the process of creating a newsletter from a set of articles,AGENTS
+Search for a specific historical fact and provide the context,AGENTS
+Use a mapping API to provide real-time navigation and traffic updates,AGENTS
+Orchestrate a workflow to automate a complex business process,AGENTS
+Use a shell command to find the size of a specific file,AGENTS
+Search for a specific movie on a streaming service and check its availability,AGENTS
+Automate the process of updating a website with fresh content,AGENTS
+Use a machine learning API to classify a large set of images,AGENTS
+Monitor a social media stream for specific hashtags and send a notification,AGENTS
+Use a terminal command to find the owner of a specific file,AGENTS
+Automate the process of generating a report from a set of log files,AGENTS
+Search for a specific type of information on a knowledge base,AGENTS
+Use a code analysis tool to find potential bugs in a script,AGENTS
+Orchestrate a workflow to manage a cloud-based infrastructure,AGENTS
+Use a shell script to automate a data migration process,AGENTS
+Search for a specific law or regulation and provide a summary,AGENTS
+Automate the process of generating a daily weather forecast,AGENTS
+Use a speech-to-text API to transcribe an audio recording,AGENTS
+Monitor a system for potential security threats and send an alert,AGENTS
+Use a command-line tool to format a source code file,AGENTS
+Automate the process of creating a summary of a news feed,AGENTS
+Search for a specific image on a stock photo site,AGENTS
+Use a summarization API to condense a long document,AGENTS
+Orchestrate a workflow to test and deploy a mobile application,AGENTS
+Use a shell script to automate a series of repetitive tasks,AGENTS
+Search for a specific stock and find its current price,AGENTS
+Automate the process of generating a monthly performance report,AGENTS
+Use a translation API to translate a document in real-time,AGENTS
+Monitor a platform for specific user activity and trigger an action,AGENTS
+Use a terminal search command to find all occurrences of a word,AGENTS
+Automate the process of creating a summary of a long conversation,AGENTS
+Search for a specific type of data on a public repository,AGENTS
+Use an API to interact with a specific third-party service,AGENTS
+Orchestrate a complex task involving multiple steps and conditions,AGENTS
+Use a shell script to manage a system's configuration,AGENTS
+Search for a specific book on an online library and check its availability,AGENTS
+Automate the process of creating a report from a digital survey,AGENTS
+Use a natural language understanding API to extract meaning from text,AGENTS
+Monitor a sensor for specific conditions and send an alert,AGENTS
+Use a terminal command to check the status of a network connection,AGENTS
+Automate the process of generating a daily summary of system logs,AGENTS
+Search for a specific set of documents on a server,AGENTS
+Use a code generation API to create a prototype of an application,AGENTS
+Orchestrate a workflow to manage a software development lifecycle,AGENTS
+Use a shell script to automate a series of installation steps,AGENTS
+Search for a specific dataset and provide a summary of its contents,AGENTS
+Automate the process of generating a weekly report from a set of metrics,AGENTS
+Use an authentication service to secure a web application,AGENTS
+Monitor a social media platform for brand mentions and send a alert,AGENTS
+Use a command-line tool to perform a statistical analysis,AGENTS
+Automate the process of creating a presentation from a set of slides,AGENTS
+Search for a specific historical event and provide a detailed timeline,AGENTS
+Use a mapping service to find the points of interest in a specific area,AGENTS
+Orchestrate a workflow to automate a series of marketing tasks,AGENTS
+Use a shell command to check the status of a specific service,AGENTS
+Search for a specific product and find its reviews and ratings,AGENTS
+Automate the process of updating a database with information from a web form,AGENTS
+Use a machine learning model to predict a specific outcome from a dataset,AGENTS
+Monitor an online feed for specific keywords and filter the results,AGENTS
+Use a terminal command to check the integrity of a file,AGENTS
+Automate the process of generating a report from a set of analytical results,AGENTS
+Search for a specific piece of information in a massive document,AGENTS
+Use a code linting tool to improve the quality of a script,AGENTS
+Orchestrate a workflow to manage a distributed system,AGENTS
+Use a shell script to automate a complex system update,AGENTS
+Search for a specific legal case and summarize the judgment,AGENTS
+Automate the process of generating a daily news summary,AGENTS
+Use a voice recognition API to perform a specific task,AGENTS
+Monitor a system for specific error patterns and send a report,AGENTS
+Use a command-line tool to optimize a file for performance,AGENTS
+Automate the process of creating a summary of a research paper,AGENTS
+Search for a specific image on the internet and identify its source,AGENTS
+Use a language translation service to translate a conversation in real-time,AGENTS
+Orchestrate a multi-step workflow to process a batch of files,AGENTS
+Use a shell script to automate a periodic system check,AGENTS
+Search for a specific astronomical event and provide a schedule,AGENTS
+Automate the process of generating a monthly summary of a project,AGENTS
+Use an API to fetch data from a specific online database,AGENTS
+Monitor a platform for specific changes and report them,AGENTS
+Use a terminal command to find the processes consuming the most resources,AGENTS
+Automate the process of creating a summary of a multi-party meeting,AGENTS
+Search for a specific type of resource on a shared drive,AGENTS
+Use an agentic workflow to plan and execute a series of actions,AGENTS
+Orchestrate a task that involves both automated and human steps,AGENTS
+Use a shell script to automate the management of a system's logs,AGENTS
+Search for a specific scientific concept and provide various explanations,AGENTS
+Automate the process of generating a report from a set of field observations,AGENTS
+Use a natural language processing model to summarize a collection of articles,AGENTS
+Monitor a system for specific performance metrics and adjust the parameters,AGENTS
+Use a command-line tool to perform a specific data transformation,AGENTS
+Automate the process of creating a newsletter from a collection of blog posts,AGENTS
+Search for a specific cultural event and provide its historical background,AGENTS
+Use a mapping API to find the most efficient route for a delivery service,AGENTS
+Orchestrate a workflow to automate the management of a cloud platform,AGENTS
+Use a shell command to check the status of a specific network interface,AGENTS
+Search for a specific type of information in an online archive,AGENTS
+Automate the process of updating a system's documentation from a set of notes,AGENTS
+Use a machine learning algorithm to group a dataset into different clusters,AGENTS
+Monitor an online feed for specific trends and send a comprehensive report,AGENTS
+Use a terminal command to check the security permissions of a specific file,AGENTS
+Automate the process of generating a daily summary of a team's activity,AGENTS
+Search for a specific dataset and provide a visualization of its contents,AGENTS
+Use a code refactoring tool to improve the structure of a script,AGENTS
+Orchestrate a workflow to manage a microservices-based application,AGENTS
+Use a shell script to automate a series of data processing steps,AGENTS
+Search for a specific research finding and provide its impact on the field,AGENTS
+Automate the process of generating a report from a set of survey responses,AGENTS
+Use a natural language processing API to extract entities from an unstructured text,AGENTS
+Monitor an online platform for brand sentiment and send a daily report,AGENTS
+Use a command-line tool to perform a complex file manipulation task,AGENTS
+Automate the process of creating a summary of a long research document,AGENTS
+Search for a specific image in a large database using an image search API,AGENTS
+Use a language translation API to translate a technical document in real-time,AGENTS
+Orchestrate a complex multi-tool workflow to solve a specific problem,AGENTS
+Use a shell script to manage the lifecycle of a set of system processes,AGENTS
