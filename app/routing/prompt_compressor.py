@@ -52,14 +52,16 @@ class AdaptivePromptCompressor:
 
     # ── Static filler words ──
     STATIC_FILLER_WORDS = [
-        r'\bum\b', r'\buh\b', r'\bhmm\b',
-        r'\bbasically\b', r'\bactually\b', r'\bliterally\b',
-        r'\breally\b', r'\bkind of\b', r'\bsort of\b',
-        r'\bI think maybe\b', r'\bI mean\b', r'\byou know\b',
+        r'\bum\b', r'\buh\b', r'\bhmm\b', r'\bhey\b', r'\bhi\b', r'\bhello\b',
+        r'\bbasically\b', r'\bactually\b', r'\bliterally\b', r'\bobviously\b',
+        r'\breally\b', r'\bkind of\b', r'\bsort of\b', r'\bjust\b',
+        r'\bI think maybe\b', r'\bI mean\b', r'\byou know\b', r'\bhonestly\b',
     ]
 
     # ── Static politeness map ──
+    # Aggressively strip conversational fluff from short prompts
     STATIC_POLITENESS_MAP = [
+        # Extreme politeness
         (r'Could you please kindly', 'Please'),
         (r'Would you be so kind as to', 'Please'),
         (r'I was wondering if you could', 'Please'),
@@ -67,6 +69,13 @@ class AdaptivePromptCompressor:
         (r'Thank you so much[!.]*\s*$', ''),
         (r'Thank you[!.]*\s*$', ''),
         (r'I appreciate your (help|assistance)\.?', ''),
+        # Conversational Intro Fluff
+        (r'^(hey|hi|hello|greetings)[!.,\s]+', ''),
+        (r'can you (please )?(tell|explain to|guide|show) me\b', 'explain'),
+        (r'how can (you|u|i|we) be like\b', ''),
+        (r'(what is|wts|whats) the use of\b', 'why use'),
+        (r'that thing which is\b', ''),
+        (r'I (just )?want to know\b', ''),
         (r'as if I\'m a complete beginner', 'simply'),
     ]
 
