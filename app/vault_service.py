@@ -99,8 +99,8 @@ class VaultService:
             VECTOR_THRESHOLD = 0.55
             
             # Layer 2: Minimum keyword overlap required
-            # At least 30% of the important words must match
-            KEYWORD_OVERLAP_MIN = 0.30
+            # Increased to 0.75 to be extremely strict and prevent short sentence collisions
+            KEYWORD_OVERLAP_MIN = 0.75
             
             # Fetch top 3 candidates (not just the closest one)
             # This allows us to verify before committing to a match

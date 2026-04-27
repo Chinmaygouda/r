@@ -303,6 +303,20 @@ def get_best_model(user_prompt, user_allowed_tier):
             score = 8.0
             print(f"[HEURISTIC] ML design task complexity bumped: MEDIUM → HARD (score=8.0)")
 
+    # --- FIX 3: HEURISTIC OVERRIDE FOR GENERAL CODING PROMPTS ---
+    # DeBERTa sometimes misses general programming tasks
+    CODE_SIGNALS = ["code", "python", "javascript", "java", "c++", "c#", "script", "html", "css", "api", "function", "debug", "algorithm"]
+    # Check for exact word matches to avoid partial matches
+    words = set(re.findall(r'\w+', prompt_lower_check))
+    code_signal_hits = sum(1 for kw in CODE_SIGNALS if kw in words)
+    
+    if code_signal_hits >= 1 and category in ("UTILITY", "CHAT", "EXTRACTION"):
+        print(f"[HEURISTIC] General coding prompt detected. Overriding category: {category} → CODE")
+        category = "CODE"
+        if complexity_label == "EASY":
+            complexity_label = "MEDIUM"
+            score = 5.5
+
     print(f"Analysis: score={score}, category={category}, label={complexity_label}")
     
     # --- STEP 2-6: MICRO-ROUTING ---
