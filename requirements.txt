@@ -24,6 +24,7 @@ cohere>=5.1.0
 
 # =============== LANGCHAIN ================
 langchain-core>=0.3.0
+langchain-huggingface>=0.1.0
 
 # =============== ROUTING & ML =============
 torch>=2.2.0

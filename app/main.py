@@ -12,6 +12,8 @@ from dotenv import load_dotenv
 from datetime import datetime
 from sqlalchemy import func
 
+load_dotenv()
+
 # Prevent Windows console from crashing on emoji prints
 if sys.platform == "win32":
     sys.stdout.reconfigure(encoding='utf-8')
@@ -33,8 +35,6 @@ from app.routing.circuit_breaker import get_circuit_breaker
 from app.guardrails import GuardrailsChecker         # Feature 7
 from app.memory_service import MemoryService         # Feature 12
 from config.settings import NON_TEXT_KEYWORDS, SAFE_FALLBACK_MODELS
-
-load_dotenv()
 
 # --- SEED MODELS FUNCTION ---
 def _seed_models_if_empty():
