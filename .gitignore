@@ -109,11 +109,11 @@ npm-debug.log
 # Memory/Session files
 *.pkl
 *.pickle
+!models/deberta-router/model_head.pkl
 
 # Redis (local instance)
 dump.rdb
 appendonly.aof
-models/deberta-router/model.safetensors
 
 # Private Research / Ideas
 Long_Term_Memory_RAG_Plan.md
