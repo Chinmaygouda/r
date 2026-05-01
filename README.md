@@ -11,7 +11,9 @@ A production-grade AI model router with local DeBERTa-v3 classification, semanti
 | **Multi-Modal Vision** | Image input (base64 or URL) via Gemini, Claude, GPT-4o |
 | **Guardrails** | Prompt injection detection + PII redaction (email, phone, Aadhaar, PAN) |
 | **User Memory** | Persistent per-user facts extracted automatically and prepended to future prompts |
-| **Semantic Cache** | pgvector-backed cache with anti-hallucination scoring (L2 + keyword overlap) |
+| **Semantic Cache** | `pgvector` PostgreSQL cache using local `bge-base-en-v1.5` embeddings (No Redis required!) |
+| **Cost Tracking** | Dynamic price-per-token calculation streamed via `[METRICS]` SSE payload |
+| **API Validation** | Secure `/test-key` endpoint to validate provider keys without browser CORS issues |
 | **Operator Prompt** | Global system prompt override via `.env` |
 | **Cascading Fallback** | Same-category → Cross-category → Last-resort with circuit breaker |
 | **Thompson Sampling** | Bandit learns from reward signals to prefer high-performing models |
@@ -87,6 +89,15 @@ Returns all extracted facts remembered for a user.
 
 ### `DELETE /memory/{user_id}` — Clear Memory
 
+### `POST /test-key` — Validate API Keys
+```json
+{
+  "provider": "Google",
+  "api_key": "your-key",
+  "model_id": "gemini-2.5-flash"
+}
+```
+
 ### `POST /feedback` — Submit Quality Feedback
 ```json
 {
@@ -127,8 +138,7 @@ Returns all extracted facts remembered for a user.
 ├── database/
 │   └── db.py                # Model fetch helpers
 ├── docs/                    # Development notes and architecture docs
-├── _archive/                # Deprecated files (not in active Python packages)
-├── models/                  # Local ML model weights (DeBERTa, via Git LFS)
+├── models/                  # Local ML model weights (DeBERTa, BGE-Base)
 ├── .env.example             # Environment variable template
 └── requirements.txt
 ```

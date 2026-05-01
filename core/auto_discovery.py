@@ -15,6 +15,7 @@ load_dotenv()
 def get_base_url(provider):
     urls = {
         "OpenAI": "https://api.openai.com/v1",
+        "NVIDIA": "https://integrate.api.nvidia.com/v1",
         "OpenRouter": "https://openrouter.ai/api/v1",
         "Together": "https://api.together.xyz/v1",
         "DeepSeek": "https://api.deepseek.com",
@@ -196,6 +197,7 @@ def run_30_day_refresh():
     # Discover from other providers using OpenAI-compatible API
     providers_to_check = {
         "OpenAI": os.getenv("OPENAI_API_KEY"),
+        "NVIDIA": os.getenv("NVIDIA_API_KEY"),
         "OpenRouter": os.getenv("OPENROUTER_API_KEY"),
         "Together": os.getenv("TOGETHER_API_KEY"),
         "DeepSeek": os.getenv("DEEPSEEK_API_KEY"),

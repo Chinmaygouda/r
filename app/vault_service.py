@@ -13,7 +13,6 @@ from app.routing.bandit import update_bandit_reward
 from database.db import update_model_performance
 from core.dispatcher import Dispatcher
 
-client = genai.Client(api_key=os.getenv("GEMINI_API_KEY"))
 dispatcher = Dispatcher()
 
 class VaultService:
@@ -144,7 +143,7 @@ class VaultService:
                 print(f"🎯 VAULT HIT (VERIFIED): ID {candidate.id} | "
                       f"Keyword overlap: {overlap:.2f}")
                 VaultService.log_system_event(user_id, "VAULT_CACHE_HIT_VERIFIED")
-                return (candidate.response, candidate.tokens_consumed, candidate.actual_cost)
+                return (candidate.response, candidate.tokens_consumed, candidate.actual_cost, candidate.id)
             
             # All candidates failed verification
             print(f"   ⚠️ {len(candidates)} candidates found but ALL failed "
@@ -316,11 +315,10 @@ class VaultService:
             # Generate title for the archived conversation
             if context:
                 title_prompt = f"Summarize this conversation in 5 words: {json.dumps(context[:3])}"
-                title_res = client.models.generate_content(
-                    model="gemini-2.5-flash",
-                    contents=title_prompt
-                )
-                topic = title_res.text.strip().replace('"', '')[:50] or "General"
+                title_res = dispatcher.execute("Google", "gemini-2.5-flash", title_prompt)
+                topic = "General Discussion"
+                if title_res.get("success"):
+                    topic = title_res["text"].strip().replace('"', '')[:50] or "General"
             else:
                 topic = "General Discussion"
             

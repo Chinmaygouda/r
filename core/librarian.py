@@ -47,11 +47,18 @@ claude-opus-4, Anthropic, CODE; ANALYSIS; AGENTS, HIGH, 7.0, 10.0, 15.0
 gpt-3.5-turbo, OpenAI, CHAT; UTILITY, LOW, 1.0, 5.0, 0.50
 """
 
+_LAST_SUCCESSFUL_AUDITOR = None
+
 def audit_models(provider_name, model_list):
+    global _LAST_SUCCESSFUL_AUDITOR
     """Processes models into the DB, allowing one model to occupy multiple rows/categories."""
     # BUG #1 FIX: Use confirmed-working model names (verified via client.models.list()).
     # Previous list used invalid/deprecated names that returned 404 from the generateContent API.
     audit_candidates = []
+    
+    # 0. Reuse the model that successfully categorized the previous provider!
+    if _LAST_SUCCESSFUL_AUDITOR:
+        audit_candidates.append(_LAST_SUCCESSFUL_AUDITOR)
     
     # 1. Try active Utility models from the database first
     db = SessionLocal()
@@ -97,7 +104,7 @@ def audit_models(provider_name, model_list):
     
     for provider, model_name in audit_candidates:
         try:
-            print(f"尝试 (Attempting) with {provider}/{model_name}...")
+            print(f"   ⏳ Attempting categorization using {provider}/{model_name}...")
             # Format the model list as a clean string for the prompt
             models_string = "\n".join(model_list)
             
@@ -108,6 +115,7 @@ def audit_models(provider_name, model_list):
                     text = res["text"]
                 response = DummyResponse()
                 print(f"✅ AI Response received using {provider}/{model_name}")
+                _LAST_SUCCESSFUL_AUDITOR = (provider, model_name)
                 break
         except Exception as e:
             print(f"⚠️ {provider}/{model_name} failed: {e}")

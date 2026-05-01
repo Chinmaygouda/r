@@ -27,21 +27,6 @@ from config.settings import (
 )
 from sqlalchemy import and_, desc
 
-client = genai.Client(api_key=os.getenv("GEMINI_API_KEY"))
-
-ROUTER_PROMPT = """
-Analyze the user's prompt and determine:
-1. Complexity score (1.0 to 10.0).
-2. Intent Category. Choose the MOST specific one from: [CODE, AGENTS, ANALYSIS, EXTRACTION, CREATIVE, UTILITY, CHAT].
-   - Priority: If it involves code, choose CODE. If it involves data/logic, choose ANALYSIS.
-3. Needs_CoT (True/False): Does this require complex reasoning or Chain of Thought?
-4. Logical_Necessity (True/False): Is a high-tier model absolutely required to prevent failure?
-5. Is_Long_Output (True/False): Does the user need a massive output?
-
-Return ONLY comma-separated values matching this format:
-score, category, needs_cot, logical_necessity, is_long_output
-Example: 8.5, CODE, True, False, True
-"""
 
 
 def complexity_distance(model, complexity_score):

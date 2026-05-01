@@ -133,25 +133,48 @@ class Dispatcher:
 
         self.hub = {}
 
-    def _get_hub_client(self, provider):
+    def _get_hub_client(self, provider, api_keys=None):
         """Lazily initialize and return OpenAI-compatible client."""
-        if provider not in self.hub:
-            hub_config = {
-                "OpenAI":      (os.getenv("OPENAI_API_KEY"),      None),
-                "xAI":         (os.getenv("XAI_API_KEY"),          "https://api.x.ai/v1"),
-                "OpenRouter":  (os.getenv("OPENROUTER_API_KEY"),   "https://openrouter.ai/api/v1"),
-                "Together":    (os.getenv("TOGETHER_API_KEY"),     "https://api.together.xyz/v1"),
-                "DeepSeek":    (os.getenv("DEEPSEEK_API_KEY"),     "https://api.deepseek.com"),
-                "Mistral":     (os.getenv("MISTRAL_API_KEY"),      "https://api.mistral.ai/v1"),
-                "HuggingFace": (os.getenv("HUGGINGFACE_API_KEY"),  "https://api-inference.huggingface.co/v1"),
+        custom_key = None
+        if api_keys:
+            key_map = {
+                "OpenAI": "openai",
+                "NVIDIA": "nvidia",
+                "xAI": "xai",
+                "OpenRouter": "openrouter",
+                "Together": "together",
+                "DeepSeek": "deepseek",
+                "Mistral": "mistral",
+                "HuggingFace": "huggingface"
             }
+            mapped_key = key_map.get(provider)
+            if mapped_key and api_keys.get(mapped_key):
+                custom_key = api_keys.get(mapped_key)
+
+        hub_config = {
+            "OpenAI":      (os.getenv("OPENAI_API_KEY"),      None),
+            "NVIDIA":      (os.getenv("NVIDIA_API_KEY"),      "https://integrate.api.nvidia.com/v1"),
+            "xAI":         (os.getenv("XAI_API_KEY"),          "https://api.x.ai/v1"),
+            "OpenRouter":  (os.getenv("OPENROUTER_API_KEY"),   "https://openrouter.ai/api/v1"),
+            "Together":    (os.getenv("TOGETHER_API_KEY"),     "https://api.together.xyz/v1"),
+            "DeepSeek":    (os.getenv("DEEPSEEK_API_KEY"),     "https://api.deepseek.com"),
+            "Mistral":     (os.getenv("MISTRAL_API_KEY"),      "https://api.mistral.ai/v1"),
+            "HuggingFace": (os.getenv("HUGGINGFACE_API_KEY"),  "https://api-inference.huggingface.co/v1"),
+        }
+
+        # If custom key, create and return one-off client
+        if custom_key and provider in hub_config:
+            _, base_url = hub_config[provider]
+            return OpenAI(api_key=custom_key, base_url=base_url, timeout=15.0) if base_url else OpenAI(api_key=custom_key, timeout=15.0)
+
+        if provider not in self.hub:
             if provider in hub_config:
                 api_key, base_url = hub_config[provider]
                 if api_key:
                     try:
                         self.hub[provider] = (
-                            OpenAI(api_key=api_key, base_url=base_url)
-                            if base_url else OpenAI(api_key=api_key)
+                            OpenAI(api_key=api_key, base_url=base_url, timeout=15.0)
+                            if base_url else OpenAI(api_key=api_key, timeout=15.0)
                         )
                     except Exception:
                         return None
@@ -183,6 +206,8 @@ class Dispatcher:
         category: str = "UTILITY",
         image_b64: Optional[str] = None,
         image_url: Optional[str] = None,
+        system_prompt_override: Optional[str] = None,
+        api_keys: Optional[dict] = None
     ) -> dict:
         """
         Standardized blocking execution.
@@ -194,14 +219,17 @@ class Dispatcher:
           - OPERATOR_SYSTEM_PROMPT is automatically prepended (Feature 13)
         """
         system_prompt = _build_system_prompt(category)
+        if system_prompt_override:
+            system_prompt = f"{system_prompt_override}\n\n{system_prompt}"
+            
         has_image = bool(image_b64 or image_url)
 
         try:
             # ── OpenAI-Compatible Hub ──────────────────────────────────
-            if provider in ["OpenAI", "xAI", "OpenRouter", "Together", "DeepSeek", "Mistral", "HuggingFace"]:
-                client = self._get_hub_client(provider)
+            if provider in ["OpenAI", "NVIDIA", "xAI", "OpenRouter", "Together", "DeepSeek", "Mistral", "HuggingFace"]:
+                client = self._get_hub_client(provider, api_keys)
                 if not client:
-                    return {"text": f"Error: {provider} API key not configured.", "tokens": 0, "success": False}
+                    return {"text": f"Error: Provider API key not configured.", "tokens": 0, "success": False}
 
                 # Feature 6: Use vision content if image provided
                 user_content = (
@@ -225,8 +253,13 @@ class Dispatcher:
             elif provider == "Anthropic":
                 try:
                     from anthropic import Anthropic
-                    if not self.client_anthropic:
-                        self.client_anthropic = Anthropic(api_key=os.getenv("ANTHROPIC_API_KEY"))
+                    custom_anthropic = api_keys.get("anthropic") if api_keys else None
+                    if custom_anthropic:
+                        client = Anthropic(api_key=custom_anthropic)
+                    else:
+                        if not self.client_anthropic:
+                            self.client_anthropic = Anthropic(api_key=os.getenv("ANTHROPIC_API_KEY"))
+                        client = self.client_anthropic
 
                     # Feature 6: vision content for Anthropic
                     if has_image:
@@ -242,7 +275,7 @@ class Dispatcher:
                     else:
                         user_content = prompt
 
-                    response = self.client_anthropic.messages.create(
+                    response = client.messages.create(
                         model=model_id,
                         max_tokens=4096,
                         system=system_prompt,
@@ -255,9 +288,15 @@ class Dispatcher:
 
             # ── Google Gemini ─────────────────────────────────────────
             elif provider == "Google":
-                if not self.client_google:
-                    self.client_google = genai.Client(api_key=os.getenv("GEMINI_API_KEY"))
-                if not self.client_google:
+                custom_google = api_keys.get("gemini") if api_keys else None
+                if custom_google:
+                    client = genai.Client(api_key=custom_google)
+                else:
+                    if not self.client_google:
+                        self.client_google = genai.Client(api_key=os.getenv("GEMINI_API_KEY"))
+                    client = self.client_google
+                    
+                if not client:
                     return {"text": "Error: Google API key not configured.", "tokens": 0, "success": False}
 
                 # Feature 6: Add image parts for Gemini vision
@@ -275,7 +314,7 @@ class Dispatcher:
                 else:
                     contents = prompt
 
-                response = self.client_google.models.generate_content(
+                response = client.models.generate_content(
                     model=model_id,
                     contents=contents,
                     config=genai_types.GenerateContentConfig(
@@ -327,24 +366,24 @@ class Dispatcher:
         category: str = "UTILITY",
         image_b64: Optional[str] = None,
         image_url: Optional[str] = None,
+        system_prompt_override: Optional[str] = None,
+        api_keys: Optional[dict] = None
     ) -> AsyncGenerator[str, None]:
         """
-        Streaming execution — yields tokens as they arrive.
-        Use with FastAPI StreamingResponse + SSE.
-
-        Usage in endpoint:
-            async for token in dispatcher.execute_stream(...):
-                yield f"data: {token}\n\n"
+        Standardized streaming execution.
         """
         system_prompt = _build_system_prompt(category)
+        if system_prompt_override:
+            system_prompt = f"{system_prompt_override}\n\n{system_prompt}"
+            
         has_image = bool(image_b64 or image_url)
 
         try:
             # ── OpenAI-Compatible Streaming ────────────────────────────
-            if provider in ["OpenAI", "xAI", "OpenRouter", "Together", "DeepSeek", "Mistral", "HuggingFace"]:
-                client = self._get_hub_client(provider)
+            if provider in ["OpenAI", "NVIDIA", "xAI", "OpenRouter", "Together", "DeepSeek", "Mistral", "HuggingFace"]:
+                client = self._get_hub_client(provider, api_keys)
                 if not client:
-                    yield f"[ERROR] {provider} API key not configured."
+                    yield "Error: Provider API key not configured."
                     return
 
                 user_content = (
@@ -368,10 +407,15 @@ class Dispatcher:
             elif provider == "Anthropic":
                 try:
                     from anthropic import Anthropic
-                    if not self.client_anthropic:
-                        self.client_anthropic = Anthropic(api_key=os.getenv("ANTHROPIC_API_KEY"))
+                    custom_anthropic = api_keys.get("anthropic") if api_keys else None
+                    if custom_anthropic:
+                        client = Anthropic(api_key=custom_anthropic)
+                    else:
+                        if not self.client_anthropic:
+                            self.client_anthropic = Anthropic(api_key=os.getenv("ANTHROPIC_API_KEY"))
+                        client = self.client_anthropic
 
-                    with self.client_anthropic.messages.stream(
+                    with client.messages.stream(
                         model=model_id,
                         max_tokens=4096,
                         system=system_prompt,
@@ -384,8 +428,13 @@ class Dispatcher:
 
             # ── Google Gemini Streaming ────────────────────────────────
             elif provider == "Google":
-                if not self.client_google:
-                    self.client_google = genai.Client(api_key=os.getenv("GEMINI_API_KEY"))
+                custom_google = api_keys.get("gemini") if api_keys else None
+                if custom_google:
+                    client = genai.Client(api_key=custom_google)
+                else:
+                    if not self.client_google:
+                        self.client_google = genai.Client(api_key=os.getenv("GEMINI_API_KEY"))
+                    client = self.client_google
 
                 contents = prompt
                 if has_image:
@@ -398,11 +447,21 @@ class Dispatcher:
                             prompt,
                         ]
 
-                for chunk in self.client_google.models.generate_content_stream(
+                # Gemma models do not support system_instruction in GenerateContentConfig
+                is_gemma = "gemma" in model_id.lower()
+                config_system_prompt = None if is_gemma else system_prompt
+                
+                if is_gemma and system_prompt:
+                    if isinstance(contents, list):
+                        contents.insert(0, f"System Instructions: {system_prompt}\n\n")
+                    else:
+                        contents = f"System Instructions: {system_prompt}\n\n{contents}"
+
+                for chunk in client.models.generate_content_stream(
                     model=model_id,
                     contents=contents,
                     config=genai_types.GenerateContentConfig(
-                        system_instruction=system_prompt,
+                        system_instruction=config_system_prompt,
                         max_output_tokens=8192,
                     )
                 ):
