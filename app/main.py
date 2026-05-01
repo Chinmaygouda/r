@@ -58,9 +58,6 @@ def _seed_models_if_empty():
             AIModel(model_id="gpt-4o", provider="OpenAI", category="CODE", tier=1, sub_tier="A", complexity_min=7.0, complexity_max=10.0, cost_per_1m_tokens=5.0, is_active=True),
             AIModel(model_id="gpt-4-turbo", provider="OpenAI", category="ANALYSIS", tier=2, sub_tier="A", complexity_min=4.0, complexity_max=9.0, cost_per_1m_tokens=10.0, is_active=True),
             AIModel(model_id="command-r-plus", provider="Cohere", category="EXTRACTION", tier=2, sub_tier="B", complexity_min=2.0, complexity_max=7.0, cost_per_1m_tokens=3.0, is_active=True),
-            # NVIDIA Free Models
-            AIModel(model_id="meta/llama-3.1-8b-instruct", provider="NVIDIA", category="UTILITY", tier=3, sub_tier="C", complexity_min=0.0, complexity_max=3.0, cost_per_1m_tokens=0.00, is_active=True),
-            AIModel(model_id="meta/llama-3.1-70b-instruct", provider="NVIDIA", category="CODE", tier=2, sub_tier="B", complexity_min=3.0, complexity_max=7.0, cost_per_1m_tokens=0.00, is_active=True),
         ]
         
         db.add_all(seed_models)
@@ -78,19 +75,8 @@ def _seed_models_if_empty():
     finally:
         db.close()
 
-from fastapi.middleware.cors import CORSMiddleware
-
 # 1. Initialize FastAPI app
 app = FastAPI(title="Unified Router Gateway - Caching First + Intelligent Routing")
-
-# Add CORS middleware to allow the Next.js frontend to connect
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=["*"],  # Allows all origins (e.g., http://localhost:3000)
-    allow_credentials=True,
-    allow_methods=["*"],  # Allows all HTTP methods (GET, POST, etc.)
-    allow_headers=["*"],  # Allows all headers
-)
 
 # --- RATE LIMITING ---
 _rate_limit_store = defaultdict(list)  # {user_id: [timestamp, ...]}
@@ -148,15 +134,6 @@ class QueryRequest(BaseModel):
     # Feature 6: Multi-Modal Input
     image_base64: Optional[str] = None  # Base64-encoded image (e.g. ore image)
     image_url: Optional[str] = None     # Or a public image URL
-    # Support for explicit frontend model selection
-    model_id: Optional[str] = None
-    provider: Optional[str] = None
-    
-    # UI Integration
-    optimizations: Optional[dict] = None
-    system_prompt: Optional[str] = None
-    api_keys: Optional[dict] = None
-    history_context: Optional[str] = None
 
 class QueryResponse(BaseModel):
     status: str
@@ -219,12 +196,11 @@ async def ask_unified(request: QueryRequest):
         )
 
         if cache_result:
-            response_text, tokens_used, cost, vault_id = cache_result
+            response_text, tokens_used, cost = cache_result
             print(f"✅ CACHE HIT | Saved tokens: {tokens_used} | Cost averted: ${cost:.4f}")
             return QueryResponse(
                 status="Success",
                 source="VAULT_CACHE",
-                vault_id=str(vault_id),
                 data={
                     "user_id": request.user_id,
                     "ai_response": response_text,
@@ -551,25 +527,22 @@ async def submit_feedback(request: FeedbackRequest):
         # Normalize feedback to 0-1 scale for reward
         reward_score = (request.feedback + 1.0) / 2.0  # -1 → 0, +1 → 1
         
-        from app.models import AIModel
-        
-        # Look up category from AIModel since UserConversation doesn't store it
-        model_entry = db.query(AIModel).filter(AIModel.model_id == conversation.model_used).first()
-        category = model_entry.category if model_entry else "UTILITY"
-        
         # Update Thompson Sampler with explicit reward
         sampler = get_thompson_sampler()
         sampler.register_model(conversation.model_used)
         sampler.update_model_performance(
             conversation.model_used,
             reward=reward_score,
-            category=category
+            category=conversation.category
         )
         
         print(f"✅ Feedback recorded: {conversation.model_used} | Reward: {reward_score:.2f}")
         
-        # We don't save feedback to conversation yet because schema lacks user_feedback column
-        # db.commit()
+        # Store feedback in database (optional logging)
+        conversation.user_feedback = request.feedback
+        if request.comments:
+            conversation.feedback_comments = request.comments
+        db.commit()
         
         return {
             "status": "success",
@@ -595,81 +568,6 @@ async def health():
         "features": ["streaming", "conversation_history", "multi_modal", "guardrails", "user_memory", "operator_prompts"]
     }
 
-# ==================== API KEY VALIDATION ====================
-from pydantic import BaseModel as PydanticBaseModel
-
-class TestKeyRequest(PydanticBaseModel):
-    provider: str
-    api_key: str
-
-@app.post("/test-key")
-async def test_api_key(request: TestKeyRequest):
-    """
-    Validate an API key by making a minimal request to the provider.
-    This runs server-side to avoid CORS issues in the browser.
-    """
-    import httpx
-    provider = request.provider.lower()
-    api_key = request.api_key
-
-    try:
-        async with httpx.AsyncClient(timeout=15.0) as client:
-            if provider == "gemini":
-                url = f"https://generativelanguage.googleapis.com/v1beta/models?key={api_key}"
-                resp = await client.get(url)
-                if resp.status_code == 200:
-                    return {"valid": True}
-                else:
-                    return {"valid": False, "error": f"{resp.status_code}: {resp.text[:200]}"}
-
-            elif provider == "nvidia":
-                url = "https://integrate.api.nvidia.com/v1/models"
-                resp = await client.get(url, headers={"Authorization": f"Bearer {api_key}"})
-                if resp.status_code == 200:
-                    return {"valid": True}
-                else:
-                    return {"valid": False, "error": f"{resp.status_code}: {resp.text[:200]}"}
-
-            elif provider == "anthropic":
-                url = "https://api.anthropic.com/v1/messages"
-                resp = await client.post(
-                    url,
-                    headers={
-                        "Content-Type": "application/json",
-                        "x-api-key": api_key,
-                        "anthropic-version": "2023-06-01",
-                    },
-                    json={
-                        "model": "claude-3-haiku-20240307",
-                        "messages": [{"role": "user", "content": "hi"}],
-                        "max_tokens": 1,
-                    },
-                )
-                # 200 or 400 (bad request but key is valid) both mean the key authenticates
-                if resp.status_code in (200, 400):
-                    return {"valid": True}
-                else:
-                    return {"valid": False, "error": f"{resp.status_code}: {resp.text[:200]}"}
-
-            elif provider == "groq":
-                url = "https://api.groq.com/openai/v1/models"
-                resp = await client.get(url, headers={"Authorization": f"Bearer {api_key}"})
-                if resp.status_code == 200:
-                    return {"valid": True}
-                else:
-                    return {"valid": False, "error": f"{resp.status_code}: {resp.text[:200]}"}
-
-            elif provider == "azure":
-                # Azure needs endpoint config — just validate format
-                return {"valid": len(api_key) > 20}
-
-            else:
-                return {"valid": len(api_key) > 0}
-
-    except Exception as e:
-        print(f"[WARN] Key test error for {provider}: {e}")
-        return {"valid": False, "error": str(e)}
-
 # ==================== FEATURE 1: STREAMING ENDPOINT ====================
 @app.post("/ask/stream")
 async def ask_stream(request: QueryRequest):
@@ -689,34 +587,6 @@ async def ask_stream(request: QueryRequest):
     if safety.blocked:
         raise HTTPException(status_code=400, detail=f"Blocked: {safety.reason}")
     safe_prompt = safety.redacted_prompt
-
-    optimizations = request.optimizations or {}
-    
-    # Feature 5: Semantic Caching Override from UI
-    if optimizations.get("semanticCache", False):
-        try:
-            query_vector = VaultService.get_embedding(safe_prompt)
-            cache_result = VaultService.semantic_search(
-                request.user_id, query_vector, original_prompt=safe_prompt
-            )
-            if cache_result:
-                cached_response, cached_tokens, cached_cost, cached_id = cache_result
-                # Fake streaming for cache hit + metrics
-                async def cache_stream():
-                    yield f"data: {cached_response}\n\n"
-                    import json
-                    metrics_json = json.dumps({
-                        "inputTokens": 0,
-                        "outputTokens": 0,
-                        "cachedTokens": cached_tokens,
-                        "cacheHit": True,
-                        "vaultId": str(cached_id)
-                    })
-                    yield f"data: [METRICS]{metrics_json}\n\n"
-                    yield "data: [DONE]\n\n"
-                return StreamingResponse(cache_stream(), media_type="text/event-stream")
-        except Exception as e:
-            print(f"[WARN] Cache lookup failed: {e}")
 
     # Feature 2: Conversation History
     history_context = ""
@@ -748,118 +618,27 @@ async def ask_stream(request: QueryRequest):
     finally:
         db.close()
 
-    # Append frontend history context if provided
-    if request.history_context:
-        history_context = request.history_context + "\n" + history_context
-
     enriched_prompt = f"{memory_context}{history_context}{safe_prompt}"
 
     # Route on the actual user question ONLY — not enriched_prompt.
     # Prevents ML heuristic from misclassifying history context words as CODE.
-    models_to_try = []
-    if request.model_id and request.model_id != "auto" and request.provider:
-        models_to_try.append({"model_id": request.model_id, "provider": request.provider})
-        category = "UTILITY" # Default for explicitly selected models
-        score = 0.0
-        tier = request.user_tier
-    elif request.model_id == "auto" and optimizations.get("smartRoute") is False:
-        # User selected Auto-Route but turned off Smart Route in the toggles. Fallback to cheap default.
-        models_to_try.append({"model_id": "gemini-2.5-flash", "provider": "Google"})
-        category = "UTILITY"
-        score = 0.0
-        tier = 3
-    else:
-        print(f"[DEBUG] safe_prompt being routed: {repr(safe_prompt)}")
-        p_model, p_provider, score, category, tier, fallbacks = VaultService.get_best_provider_and_model(
-            safe_prompt, request.user_tier
-        )
-        models_to_try.append({"model_id": p_model, "provider": p_provider})
-        models_to_try.extend(fallbacks)
+    model_id, provider, score, category, tier, fallbacks = VaultService.get_best_provider_and_model(
+        safe_prompt, request.user_tier
+    )
+    print(f"[STREAM] {provider}/{model_id} | Category: {category}")
 
     async def event_generator():
         full_response = []
-        execution_success = False
-        final_model_id = None
-        final_provider = None
-        last_error = ""
-
-        for candidate in models_to_try:
-            c_model = candidate["model_id"]
-            c_provider = candidate["provider"]
-            print(f"[STREAM] Attempting {c_provider}/{c_model} | Category: {category}")
-            
-            try:
-                async for token in get_dispatcher().execute_stream(
-                    c_provider, c_model, enriched_prompt, category=category,
-                    image_b64=request.image_base64, image_url=request.image_url,
-                    system_prompt_override=request.system_prompt
-                ):
-                    full_response.append(token)
-                    yield f"data: {token}\n\n"
-                
-                execution_success = True
-                final_model_id = c_model
-                final_provider = c_provider
-                # circuit_breaker.record_success(c_model)
-                break
-                
-            except Exception as e:
-                print(f"[WARN] Streaming failed for {c_provider}/{c_model}: {e}")
-                # circuit_breaker.record_failure(c_model)
-                last_error = str(e)
-                if len(full_response) > 0:
-                    break
-
-        if not execution_success:
-            yield f"data: [ERROR] All fallback models failed or stream interrupted. Last error: {last_error}\n\n"
+        try:
+            async for token in get_dispatcher().execute_stream(
+                provider, model_id, enriched_prompt, category=category,
+                image_b64=request.image_base64, image_url=request.image_url
+            ):
+                full_response.append(token)
+                yield f"data: {token}\n\n"
             yield "data: [DONE]\n\n"
-            return
-            
-        # Simple token estimation for metrics
-        response_text = "".join(full_response)
-        input_tokens = len(enriched_prompt) // 4
-        output_tokens = len(response_text) // 4
-        
-        # Save to Vault and get vault_id for caching and feedback
-        vault_id = None
-        try:
-            # Generate embedding for semantic cache later
-            query_vector = VaultService.get_embedding(safe_prompt)
-            cost = VaultService._calculate_cost(final_provider, final_model_id, input_tokens + output_tokens)
-            
-            vault_id = VaultService.save_to_vault(
-                request.user_id,
-                safe_prompt,
-                response_text,
-                input_tokens + output_tokens,
-                query_vector,
-                cost,
-                final_model_id,
-                final_provider,
-                session_id=request.session_id
-            )
         except Exception as e:
-            print(f"[WARN] Failed to save stream to vault: {e}")
-
-        # Calculate actual cost from DB pricing
-        cost_per_1m = 0.075  # default
-        try:
-            cost_per_1m_val = VaultService._calculate_cost(final_provider, final_model_id, 1_000_000)
-            cost_per_1m = cost_per_1m_val  # _calculate_cost(provider, model, 1M tokens) returns cost_per_1m
-        except Exception:
-            pass
-
-        import json
-        metrics_json = json.dumps({
-            "inputTokens": input_tokens, 
-            "outputTokens": output_tokens,
-            "vaultId": str(vault_id) if vault_id else None,
-            "modelId": final_model_id,
-            "provider": final_provider,
-            "costPer1M": cost_per_1m
-        })
-        yield f"data: [METRICS]{metrics_json}\n\n"
-        yield "data: [DONE]\n\n"
+            yield f"data: [ERROR] {str(e)}\n\n"
 
     return StreamingResponse(event_generator(), media_type="text/event-stream")
 
